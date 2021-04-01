@@ -10,39 +10,25 @@
 	<head>
 		<title>Draw ASR Network</title>
 		<!-- Javascripte Online -->
+		<!--
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-		<script src="https://unpkg.com/mathjs@5.8.0/dist/math.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
-		
-		<script src="https://unpkg.com/vue-slider"></script>
-			
-		<script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.umd.min.js"></script>
-    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.min.css">
-		
-		<!-- for plotting graphs: -->
+		<script type="text/javascript" src="https://visjs.github.io/vis-network/dist/vis-network.min.js" ></script>	  
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-		<script type="text/javascript" src="https://visjs.github.io/vis-network/dist/vis-network.min.js" ></script>
-		<script type="text/javascript" src="https://unpkg.com/alea@1.0.0/alea.js"></script>
-		<script type="text/javascript" src="https://visjs.github.io/vis-network/examples/network/exampleUtil.js"></script>
-		<link src="https://visjs.github.io/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
-		
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+		<script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.umd.min.js"></script>
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.min.css">
+		<script type="text/javascript" src="https://visjs.github.io/vis-network/dist/vis-network.min.js" ></script>
+		--- USED FOR PROTOTYPING -->
+
+		<script lang="javascript" src="javascript/vue.js"></script>
+		<script lang="javascript" src="javascript/vis-network.min.js"></script>
+		<script lang="javascript" src="javascript/vis.min.js"></script>
+		<script lang="javascript" src="javascript/vue-treeselect.umd.min.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="styles/mobps.css">
-	
-		<!--  for javascript and ajax call -->		
-		<script type="text/javascript" src="javascript/jQ1.js"></script>
-		<script type="text/javascript" src="javascript/jQ2.js"></script>
-		<script type="text/javascript" src="javascript/jQ2_2.js"></script>
-		<script type="text/javascript" src="javascript/jQ3.js"></script>
-		
-		<!-- excel to json related files -->
-		<script lang="javascript" src="javascript/jszip_excelToArray.js"></script>
-		<script lang="javascript" src="javascript/xlsx_excelToArray.js"></script>
-		<script lang="javascript" src="javascript/excelToArray.js"></script>
-
+		<link rel="stylesheet" type="text/css" href="styles/vis.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/vue-treeselect.min.css">
 
 	</head>
 
@@ -569,15 +555,10 @@
 	</div> <!-- ENDOF mainDiv-->
 	</body>
 		
-	<!-- Eigene Javascripte Species Data -->
-	<script type="text/javascript" src="javascript/GenomeData.js"></script>
 	
 	<!-- Eigene Javascripte Main Code -->
-	<script src="javascript/socket.io.js"></script>
 	<script type="text/javascript" src="javascript/home.js"></script>
-	<script type="text/javascript" src="javascript/Rmodule.js"></script>
-	
-	
+
 	<!-- Eigene Javascripte Checking and additional Services -->
 	<script type="text/javascript" src="javascript/Check_Services.js"></script>
 
@@ -586,24 +567,9 @@
 	
 	<!-- Navigation Menu related -->
 	<script type="text/javascript">
-		function openNav() {
-		  document.getElementById("mySidebar").style.width = "225px";
-		  document.getElementById("main").style.marginLeft = "225px";
-		 // document.getElementById("openDiv").style.display = "none";
-		  document.getElementById('openB').style.visibility = 'hidden';
-		  document.getElementById('closeB').style.visibility = 'visible';
 
-		}
-		
-		function closeNav() {
-		  document.getElementById("mySidebar").style.width = "0";
-		  document.getElementById("main").style.marginLeft= "0";
-		 // document.getElementById("openDiv").style.display = "block";
-		  document.getElementById('openB').style.visibility = 'visible';
-		  document.getElementById('closeB').style.visibility = 'hidden';
-		}
 				
-	function action(hidden) {
+		function action(hidden) {
 	        if(hidden==true) {
 	            document.getElementById('node-saveButton').style.visibility = 'hidden';
 				document.getElementById('edge-saveButton').style.visibility = 'hidden';

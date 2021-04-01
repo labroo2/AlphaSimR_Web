@@ -2,6 +2,15 @@ Vue.component('treeselect', VueTreeselect.Treeselect);
 //Vue.component('slider', VueSlider.Slider);
 //**************** Network Script **********************************//
 //*********************************************************************//
+
+// define the class asrNode and asrEdge with default values	to match AlphaSimR scheme definition
+function asrNode (id, x, y) {
+	// TODO
+}
+function asrEdge (fr, to) {
+	// TODO
+}
+
 // define the classe myNode and myEdge with default values
 function myNode (id, x, y) {
 	this['id'] = id;
@@ -20,7 +29,7 @@ function myNode (id, x, y) {
 	this['Genotype generation'] = "Random-sampling";
 	this['Genotype generation subpopulation'] = "Population 1"; 
 	}
-	
+
 function myEdge (fr, to) {
 	this['from'] = fr;
 	this['to'] = to;

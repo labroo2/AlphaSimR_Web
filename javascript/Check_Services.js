@@ -1,0 +1,411 @@
+// this function will always be called when the body is focused on,
+// it will check all possibly inconsistencies if anything of the following components are changed:
+function checkEverything(id){
+    	console.log(id);
+		
+	/*
+	 * REMOVED NON RELATED DIV ID WORNINGS
+	 */	
+
+	if(id == "edge-popUp" || id == "node-popUp"){
+		
+		data_Vue.warnings4 = [];
+		count = 0;
+		for(key in data_Vue.warnings1) {
+			if(data_Vue.warnings1.hasOwnProperty(key)) {
+				count++;
+			}	
+		}
+		
+		if(count==0){
+			data_Vue.warnings1 = [];
+		}
+		nodes = data_Vue.nodes.get();
+		nodes = Array.from(nodes);
+		if(nodes.length > 0){
+			for(var i=0; i < nodes.length; i++){
+				active_node = nodes[i];
+				
+				gen_warn_text = "Please assign each node with a name.";
+				if (!active_node['id'] & data_Vue.warnings4.indexOf(gen_warn_text) == -1){			
+					data_Vue.warnings4.push(gen_warn_text);
+				}
+				
+				gen_warn_text = "Number of individuals in Node " + active_node['id'] + " is not specified";
+				if (!active_node['Number of Individuals'] & data_Vue.warnings4.indexOf(gen_warn_text) == -1){			
+					data_Vue.warnings4.push(gen_warn_text);
+				}
+				
+				gen_warn_text = "Share of genotyped individuals in " + active_node['id'] + " must be between 0 and 1.";
+				if((!active_node['Proportion of genotyped individuals'] || active_node['Proportion of genotyped individuals'] < 0 || active_node['Proportion of genotyped individuals']  > 1) & data_Vue.warnings4.indexOf(gen_warn_text) == -1) {
+					data_Vue.warnings4.push(gen_warn_text);
+				}
+				
+				gen_warn_text = "Share of male individuals in " + active_node['id'] + " must be between 0 and 1.";
+				if((active_node['Sex'] == "Both" & (!active_node['Proportion of Male'] || active_node['Proportion of Male'] < 0 || active_node['Proportion of Male']  > 1)) & data_Vue.warnings4.indexOf(gen_warn_text) == -1) {
+					data_Vue.warnings4.push(gen_warn_text);
+				}
+				
+				gen_warn_text = "Node " + active_node['id'] + " only contains male individuals. Adapt chosen sex!";
+				if((active_node['Sex'] == "Both" & (!active_node['Proportion of Male'] || active_node['Proportion of Male']  == 1)) & data_Vue.warnings4.indexOf(gen_warn_text) == -1) {
+					data_Vue.warnings4.push(gen_warn_text);
+				}
+				
+				gen_warn_text = "Node " + active_node['id'] + " only contains female individuals. Adapt chosen sex!";
+				if((active_node['Sex'] == "Both" & (!active_node['Proportion of Male'] || active_node['Proportion of Male']  == 0)) & data_Vue.warnings4.indexOf(gen_warn_text) == -1) {
+					data_Vue.warnings4.push(gen_warn_text);
+				}
+				
+			}
+		}
+		
+		data_Vue.warnings = data_Vue.warnings1.concat(data_Vue.warnings2, data_Vue.warnings3, data_Vue.warnings4, data_Vue.warnings5 , data_Vue.warnings6);
+		data_Vue.warnings = data_Vue.warnings.filter(Boolean);
+	}
+	
+
+	if(id == "edge-popUp" || id == "node-popUp"){
+		
+		count = 0;
+		for(key in data_Vue.warnings1) {
+			if(data_Vue.warnings1.hasOwnProperty(key)) {
+				count++;
+			}	
+		}
+		
+		if(count==0){
+			data_Vue.warnings1 = [];
+		}
+		
+		data_Vue.warnings5 = [];
+
+				
+		nodes = data_Vue.nodes.get();
+		nodes = Array.from(nodes);
+		edges = data_Vue.edges.get();
+		edges = Array.from(edges);
+		
+		if(edges.length > 0){
+			edge_from = [];
+			edge_to = [];
+			edge_nrfrom = [];
+			edge_nrto = [];
+			edge_type = [];
+			node_name = [];
+			node_founder = [];
+			
+			for(var i=0; i < nodes.length; i++){
+				node_name.push(nodes[i]['id'])
+				node_founder.push(nodes[i]['Founder'])
+			}
+			
+			for(var i=0; i < edges.length; i++){
+				edge_to.push(edges[i]['to']);
+				edge_from.push(edges[i]['from']);
+				edge_type.push(edges[i]['Breeding Type']);
+				for(var j=0; j < nodes.length; j++){
+					if(edge_from[i]==node_name[j]){
+						edge_nrfrom.push(j);
+					}
+					if(edge_to[i]==node_name[j]){
+						edge_nrto.push(j);
+					}
+				}
+				gen_warn_text = "No Breeding Type selected for Edge between " + edges[i]['from'] + " and " + edges[i]['to'];
+				if (edges[i]['Breeding Type']=="" & data_Vue.warnings5.indexOf(gen_warn_text) == -1){			
+					data_Vue.warnings5.push(gen_warn_text);
+				}
+			}
+			
+			
+			for(var i=0; i < edges.length; i++){
+				if(edge_type[i] =="Selection" || edge_type[i] == "Aging" || edge_type[i] == "Split"){
+					size1 = parseFloat(nodes[edge_nrfrom[i]]['Number of Individuals']);
+					size2 = parseFloat(nodes[edge_nrto[i]]['Number of Individuals']);
+					if(size1<size2){
+						gen_warn_text = "More individuals selected in " + edge_to[i] + " than present in " + edge_from[i];
+						data_Vue.warnings5.push(gen_warn_text);
+					}
+				}
+				if(edge_type[i] =="Selection" || edge_type[i] == "Aging" || edge_type[i] == "Split"){
+					if(nodes[edge_nrfrom[i]]['Sex']!=nodes[edge_nrto[i]]['Sex'] & nodes[edge_nrto[i]]['Sex'] != "Both"){
+						gen_warn_text = "Different sex between nodes " + edge_to[i] + " and " + edge_from[i];
+						data_Vue.warnings5.push(gen_warn_text);
+					}
+				}
+				if(edge_type[i] =="Repeat"){
+					if(nodes[edge_nrfrom[i]]['Number of Individuals']!=nodes[edge_nrto[i]]['Number of Individuals']){
+						gen_warn_text = "Different number of individuals in nodes of the Repeat between " + edge_to[i] + " and " + edge_from[i];
+						data_Vue.warnings5.push(gen_warn_text);
+					}
+				}
+			}
+			
+			for(var i=0; i < nodes.length; i++){
+				if(node_founder[i] == 'Yes'){
+					for(var j=0; j <edges.length; j++){
+						if(edge_nrto[j] == i && edge_type[j] != 'Repeat'){
+							gen_warn_text = "Founder-Node " + node_name[i] + " has incoming Edges.";
+							data_Vue.warnings5.push(gen_warn_text);	
+						}
+					}
+				}
+				else{
+					count = 0;
+					combine_count = 0;
+					split_count = 0;
+					types = [];
+					for(var j=0; j < edges.length; j++){
+						if(edge_nrto[j] == i){
+							count++;
+							if(edge_type[j] == "Combine"){
+								size1 = parseFloat(nodes[edge_nrfrom[j]]['Number of Individuals']);
+								combine_count = combine_count + size1;
+							}
+						}
+						if(edge_nrfrom[j] == i){
+							if(edge_type[j] == "Split"){
+								size1 = parseFloat(nodes[edge_nrto[j]]['Number of Individuals']);
+								split_count = split_count + size1;
+							}
+						}
+						
+						if(edge_nrto[j] == i){
+							if(types.length==0 & edge_type[j] != "Repeat"){
+								types = edge_type[j];
+							}
+
+							else if(types != edge_type[j] & edge_type[j] != "Repeat"){
+								data_Vue.warnings5.push(types)
+								data_Vue.warnings5.push(edge_type[j])
+								gen_warn_text = "Node "+ node_name[i] +" is generated by different breeding types. This is no intended/supported structure";
+								data_Vue.warnings5.push(gen_warn_text);	
+							
+							}
+						}
+						
+					}
+
+					
+					if(count==0){
+						gen_warn_text = "Node "+ node_name[i] +" is no Founder but has no incoming Edges";
+						data_Vue.warnings5.push(gen_warn_text);	
+					}
+					size2 = nodes[i]['Number of Individuals'];
+					if(combine_count>0 && combine_count != size2){
+						gen_warn_text = "Individual number for Combining nodes to "+ node_name[i] +" do not add up";
+						data_Vue.warnings5.push(gen_warn_text);	
+					}
+					if(split_count>0 && split_count != size2){
+						gen_warn_text = "Individual numbers for Splitting node "+ node_name[i] +" do not add up";
+						data_Vue.warnings5.push(gen_warn_text);	
+					}
+				}
+			}
+			
+			
+			for(var j=0; j < edges.length; j++){
+				if(edges[j]['Selection Type'] =="BVE" && (edges[j]['Cohorts used in BVE'] != undefined && edges[j]['Cohorts used in BVE'] != "Manual select")){
+					gen_warn_text = "It's highly suggested to use Manual Select to selected cohorts used for BVE (Revisit Edge between: " + edges[j]['from'] + " and " + edges[j]['to'] +")";
+					data_Vue.warnings5.push(gen_warn_text);	
+				}
+			}
+			
+			
+		}
+		
+		data_Vue.warnings = data_Vue.warnings1.concat(data_Vue.warnings2, data_Vue.warnings3, data_Vue.warnings4, data_Vue.warnings5, data_Vue.warnings6);
+		data_Vue.warnings = data_Vue.warnings.filter(Boolean);
+		
+		if(data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste != undefined && data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"] != undefined){
+			for(var j = 0; j < data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"].length; j++){
+				if(data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"][j]== "stallion licensingOCD:-4"){
+					data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"][j] = "stallion licensing OCD:-4"
+				}
+				if(data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"][j]== "breeding maresprüfung:-5"){
+					data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"][j] = "mare performance test:-5"
+				}
+				if(data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"][j]== "breeding maresprüfung:-6"){
+					data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"][j] = "mare performance test:-6"
+				}
+				if(data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"][j]== "breeding maresprüfung:-7"){
+					data_Vue.edges._data.ZuchthengsteCopy4598_Zuchthengste["Manuel selected cohorts"][j] = "mare performance test:-7"
+				}
+			}
+		}
+	} 
+	data_Vue.project_saved = false;
+}   // END OF CHECK EVERYTHING FUNC
+	
+	
+
+/*	**********************************
+	OTHER HELPFUL FUNCTIONS I SUPPOSE
+	**********************************
+*/  
+
+	function isNumeric(val) {
+	  return !isNaN(parseFloat(val)) && isFinite(val);
+	}
+	
+	function isPositiveInteger(val) {
+		var isNumber = Math.floor(Number(val));
+		var thisNumber = (String(isNumber) == val && isNumber >= 0);
+		return thisNumber;
+	}
+
+	function isPositiveInt(val) {
+		return val >>> 0 === parseFloat(val);
+	}
+
+	function qtlsforPheno(qtlName, qtlCnt) {
+
+		var thisQTL = data_Vue.traitsinfo[qtlName]["Trait QTL Info"];
+		var thisTrait = data_Vue.traitsinfo[qtlName]["Trait Name"];
+		
+		for (k=0; k<qtlCnt; k++) {	
+			curBP = thisQTL[k]['QTL BP'];
+			curID = thisQTL[k]['QTL ID'];
+			gen_warn_text = thisTrait+"-bp"+(k+1)+":"+"Please enter bp and must be a Positive Number .";	
+			checkBP = isPositiveInt(thisQTL[k]['QTL BP']);
+			if ((!thisQTL[k]['QTL BP'] || thisQTL[k]['QTL BP'] <= 0 || checkBP == false )& data_Vue.warnings.indexOf(gen_warn_text) == -1) {
+				data_Vue.warnings.push(gen_warn_text);
+			}
+			else if ((thisQTL[k]['QTL BP'] != "" & thisQTL[k]['QTL BP'] > 0 & checkBP == true) & data_Vue.warnings.indexOf(gen_warn_text) > -1){                                                                    
+				data_Vue.warnings.splice(data_Vue.warnings.indexOf(gen_warn_text),1); 
+			}		
+
+			gen_warn_text = thisTrait+"-Chromo "+(k+1)+":"+"Please enter chromosomes and must be a Positive Number.";
+			checkchromo = isPositiveInt(thisQTL[k]['QTL Chromosome']);
+			if ((!thisQTL[k]['QTL Chromosome'] || thisQTL[k]['QTL Chromosome'] <= 0 || checkchromo == false) & data_Vue.warnings.indexOf(gen_warn_text) == -1) {
+				data_Vue.warnings.push(gen_warn_text);
+			}
+			else if ((thisQTL[k]['QTL Chromosome'] != "" & thisQTL[k]['QTL Chromosome'] > 0 & checkchromo ==true) & data_Vue.warnings.indexOf(gen_warn_text) > -1){
+				data_Vue.warnings.splice(data_Vue.warnings.indexOf(gen_warn_text),1); 
+			}		
+			
+			checkAANumeric = isNumeric(thisQTL[k]['QTL Effect AA']);
+			gen_warn_text = thisTrait+"-EffectAA"+(k+1)+":"+"Please enter Effect AA and must be a Number.";
+			if ((!thisQTL[k]['QTL Effect AA'] || checkAANumeric == false ) & data_Vue.warnings.indexOf(gen_warn_text) == -1) {
+				data_Vue.warnings.push(gen_warn_text);
+			}
+			else if (thisQTL[k]['QTL Effect AA'] != "" & checkAANumeric == true & data_Vue.warnings.indexOf(gen_warn_text) > -1){                                                                       
+				data_Vue.warnings.splice(data_Vue.warnings.indexOf(gen_warn_text),1); 
+			}	
+			
+			checkABNumeric = isNumeric(thisQTL[k]['QTL Effect AB']);	
+			gen_warn_textAB = thisTrait+"-EffectAB"+(k+1)+":"+"Please enter Effect AB and must be a Number.";
+			if ((!thisQTL[k]['QTL Effect AB'] || checkABNumeric == false) & data_Vue.warnings.indexOf(gen_warn_textAB) == -1) {
+				data_Vue.warnings.push(gen_warn_textAB);
+			}
+			else if ((thisQTL[k]['QTL Effect AB'] != "" ) & checkABNumeric == true & data_Vue.warnings.indexOf(gen_warn_textAB) > -1){                                                                       
+				data_Vue.warnings.splice(data_Vue.warnings.indexOf(gen_warn_textAB),1); 
+			}
+
+			
+			checkBBNumeric = isNumeric(thisQTL[k]['QTL Effect BB']);	
+			gen_warn_textBB = thisTrait+"-EffectBB"+(k+1)+":"+"Please enter Effect BB and must be a Number.";
+			if ((!thisQTL[k]['QTL Effect BB'] || checkBBNumeric == false) & data_Vue.warnings.indexOf(gen_warn_textBB) == -1) {
+				data_Vue.warnings.push(gen_warn_textBB);
+			}
+			else if ((thisQTL[k]['QTL Effect BB'] != "") & checkBBNumeric == true & data_Vue.warnings.indexOf(gen_warn_textBB) > -1){                                                                       
+				data_Vue.warnings.splice(data_Vue.warnings.indexOf(gen_warn_textBB),1); 
+			}
+					
+			checkAllele = isNumeric(thisQTL[k]['QTL Allele Frequency']);		
+			gen_warn_text = thisTrait+"-Allele Freq "+(k+1)+":"+"Please enter Allele Freq and it must be between 0 and 1.";
+			if ((!thisQTL[k]['QTL Allele Frequency']  || thisQTL[k]['QTL Allele Frequency'] <0 || thisQTL[k]['QTL Allele Frequency'] >1 ) & data_Vue.warnings.indexOf(gen_warn_text) == -1) {
+				data_Vue.warnings.push(gen_warn_text);
+			}
+			else if ((thisQTL[k]['QTL Allele Frequency'] != "" & thisQTL[k]['QTL Allele Frequency'] >=0 & thisQTL[k]['QTL Allele Frequency'] <=1) & data_Vue.warnings.indexOf(gen_warn_text) > -1){                                                                       
+				data_Vue.warnings.splice(data_Vue.warnings.indexOf(gen_warn_text),1); 
+			}	
+					
+		}
+	}
+
+	function matrix1() {
+		var traitsCnt = data_Vue.traitsinfo.length;
+		for(var i=0; i < traitsCnt; i++){			
+			for(var j=0; j < data_Vue.matrix[i].row.length; j++){
+				curMatVal = data_Vue.matrix[i].row[j].val;	
+					
+				gen_warn_text = data_Vue.traitsinfo[i]['Trait Name']+"-"+data_Vue.traitsinfo[j]['Trait Name']+": Phenotypic Correlation must be between -1 and 1 ";
+
+				if (((!curMatVal & curMatVal == "" & curMatVal !="0") || curMatVal <-1 || curMatVal > 1 || isNaN(curMatVal)) & data_Vue.warnings.indexOf(gen_warn_text) == -1) {
+					data_Vue.warnings.push(gen_warn_text);
+				}
+				else if ((curMatVal != "" & curMatVal >=-1 & curMatVal <=1 & isNaN(curMatVal) == false ) & data_Vue.warnings.indexOf(gen_warn_text) > -1){
+					data_Vue.warnings.splice(data_Vue.warnings.indexOf(gen_warn_text),1); 
+				}
+				
+			}			
+		}			
+	}	
+
+  
+	function matrix2() {
+			var traitsCnt = data_Vue.traitsinfo.length;
+			for(var i=0; i < traitsCnt; i++){			
+				for(var j=0; j < data_Vue.matrix2[i].row.length; j++){
+					curMatVal2 = data_Vue.matrix2[i].row[j].val;	
+
+					gen_warn_text = data_Vue.traitsinfo[i]['Trait Name']+"-"+data_Vue.traitsinfo[j]['Trait Name']+": Genetic Correlation must be between -1 and 1 ";
+					
+					if (((!curMatVal2 & curMatVal2 == "" & curMatVal2 !="0") || curMatVal2 <-1 || curMatVal2 > 1 || isNaN(curMatVal2)) & data_Vue.warnings.indexOf(gen_warn_text) == -1) {
+						data_Vue.warnings.push(gen_warn_text);
+					}
+					else if ((curMatVal2 != "" & curMatVal2 >=-1 & curMatVal2 <=1 & isNaN(curMatVal2) == false ) & data_Vue.warnings.indexOf(gen_warn_text) > -1){
+						data_Vue.warnings.splice(data_Vue.warnings.indexOf(gen_warn_text),1); 
+					}
+					
+				}			
+			}			
+	}
+
+				
+
+
+
+
+// this funtion will always be called after an edge has been created,
+// you can use this function to add further services, e.g add the secong parent automatically if Breeding Type == Reproduction etc.
+function addServices(){
+	if(data_Vue.active_edge['Breeding Type'] == "Reproduction"){
+		var val = document.getElementById("parents_input").value ;
+		if(val =='') return;
+		if(data_Vue.nodes.get(val) == null){  	// create new node by copying:
+			var p1_node = data_Vue.nodes.get(data_Vue.active_edge.from);
+			p1_node.Sex = p1_node.Sex == "Male" ? "Female" : "Male" ;
+			p1_node.id = val;
+			p1_node.x = p1_node.x+50;
+			addNode_extern(p1_node);
+		}								
+		var child_node = data_Vue.nodes.get(data_Vue.active_edge.to);
+		var new_edge = new myEdge(val, child_node.id);
+		new_edge['Breeding Type'] = "Reproduction";
+		new_edge['Time Needed'] = document.getElementById("time_n").value;
+		for(var i=0; i < data_Vue.active_edge.useVar.length; i++){
+			new_edge['useVar'].push(data_Vue.active_edge.useVar[i]);
+		}
+		
+		addEdge_extern(new_edge);
+	}
+	if(data_Vue.active_edge['Breeding Type'] == "Split"){
+		var val = document.getElementById("split_input").value ;
+		if(val =='') return;
+		if(data_Vue.nodes.get(val) == null){  	// create new node by copying:
+			var p1_node = data_Vue.nodes.get(data_Vue.active_edge.to);
+			p1_node.id = val;
+			p1_node.x = p1_node.x+50;
+			p1_node['Number of Individuals'] = data_Vue.nodes.get(data_Vue.active_edge.from)['Number of Individuals'] - p1_node['Number of Individuals'];
+			p1_node.individualsVar ='';
+			addNode_extern(p1_node);
+		}								
+		var parent_node = data_Vue.nodes.get(data_Vue.active_edge.from);
+		var new_edge = new myEdge(parent_node.id, val);
+		new_edge['Breeding Type'] = "Split";
+		
+		addEdge_extern(new_edge);
+	}
+}
