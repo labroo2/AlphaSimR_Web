@@ -21,7 +21,7 @@
 		<script type="text/javascript" src="https://visjs.github.io/vis-network/dist/vis-network.min.js" ></script>
 		--- USED FOR PROTOTYPING -->
 
-		<script lang="javascript" src="javascript/vue.js"></script>
+		<script lang="javascript" src="javascript/vue.js"></script> <!-- devel version --> <!-- for production use vue.min.js -->
 		<script lang="javascript" src="javascript/vis-network.min.js"></script>
 		<script lang="javascript" src="javascript/vis.min.js"></script>
 		<script lang="javascript" src="javascript/vue-treeselect.umd.min.js"></script>
@@ -141,18 +141,7 @@
 							<input type="checkbox" false-value="No" true-value="Yes" v-model="active_node.phasing_required">
 						</td>
 					</tr>
-					<tr v-show="active_node.Founder == 'Yes' & geninfo['advanced'] & geninfo['advanced_sub']">
-						<td>Population allele frequencies
-							<span class="tooltip">&#9432 <span class="tooltiptext">Pick the originating subpopulation. Allele frequencies for nodes with no genotype data from the same subpopulation will have similar allele frequencies.</span></span>
-						</td>
-						<td>
-							<select v-model="active_node['Genotype generation subpopulation']">
-								<option v-for="option in subpopulation['subpopulation_list']" v-bind:value="option.Name">
-								{{ option.Name }}
-								</option>
-							</select>
-						</td>
-					</tr>					
+			
 					<tr>
 						<td>Sex
 							<span class="tooltip">&#9432 <span class="tooltiptext">Sex of the individuals in this cohort</span></span>
@@ -177,37 +166,7 @@
 							</select>
 						</td>
 					</tr>
-					<tr v-if="geninfo['advanced'] && geninfo['advanced_eco']">
-						<td>Housing Cost Class
-							<span class="tooltip">&#9432 <span class="tooltiptext">Choose the housing class for the individuals in this cohort</span></span>
-						</td>
-						<td> 
-							<select v-model="active_node['Housing Cost Class']">
-								<option v-for="option in economy['Animal Housing Costs']" v-bind:value="option.Name">
-								{{ option.Name }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					<tr v-if="geninfo['advanced'] && geninfo['advanced_advanced'] && geninfo['advanced_advanced_geno']">
-						<td>Proportion of genotyped individuals
-							<span class="tooltip">&#9432 <span class="tooltiptext">Select the share of genotyped individuals. Mostly relevant for the use of single-step and economic calculations.</span></span>
-						</td>
-						<td> <input placeholder="Type a number" type="number" max=1 min=0 step=0.001 v-model="active_node['Proportion of genotyped individuals']"> </td>
-					</tr>
-					
-					<tr v-if="geninfo['advanced'] && geninfo['advanced_advanced'] && geninfo['advanced_advanced_del']">
-						<td> Delete cohort information
-							<span class="tooltip">&#9432 <span class="tooltiptext">Setting this will automatically delete recombination history etc. of the cohort to reduce file size.</span></span>
-						</td>
-													
-						<td> <input type="checkbox" v-model="active_node['delete_info']"> </td>
-					</tr>
-					<!--tr>
-						<td>Include in Plot </td> 
-						<td> <input type="checkbox" false-value="No" true-value="Yes" v-model="active_node['BV Plot']"> 
-						</td>
-					</tr-->	
+
 					<tr v-show="active_node.Sex == 'Both'">
 						<td>Proportion of Male</td>
 						<td> <input placeholder="Type a number" type="number" max=1 min=0 step=0.001 v-model="active_node['Proportion of Male']"> </td>
@@ -258,73 +217,14 @@
 						</td>
 						<td><input style="width:40px;border:2px solid lightblue;font-size:12pt;height:22px;" id="time_n" list="indVar" onchange="updateVar('Time Needed', value)" placeholder="Type a number" min="0" max="10000" step="1" v-model="active_edge['Time Needed']"> {{geninfo['Time Unit']}}</td>
 					</tr>	
-					<tr v-show="geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_last']">
-						<td>Use last available
-							<span class="tooltip">&#9432 <span class="tooltiptext">Activating this will use the last repeat available from that node - not necessary the node from the same repeat</span></span>
-						</td>		
-						<td><input type="checkbox" v-model="active_edge['last_available']"> </td>
-					</tr>
-					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_ogc']">
-						<td>OGC
-							<span class="tooltip">&#9432 <span class="tooltiptext">Use optimum genetic contribution according to Meuwissen 1996 to determine how often each individual is used for reproduction.</span></span>
-						</td>
-						<td><input type="checkbox" false-value="No" true-value="Yes"  v-model="active_edge['OGC']"></td>
-					</tr>	
-					
-					<tr v-if="['Reproduction'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_mating']">
-						<td>Avoid full-sib matings
-							<span class="tooltip">&#9432 <span class="tooltiptext">Activate this to not use full-sibling pairs for reproduction.</span></span>
-						</td>
-						<td><input type="checkbox" v-model="active_edge['full_sib']"></td>
-					</tr>
-					
-					<tr v-if="['Reproduction'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_mating']">
-						<td>Avoid half-sib matings
-							<span class="tooltip">&#9432 <span class="tooltiptext">Activate this to not use half-sibling pairs for reproduction.</span></span>
-						</td>
-						<td><input type="checkbox" v-model="active_edge['half_sib']"></td>
-					</tr>
+
 					
 					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['OGC']=='Yes'">
 						<td>Maximum increase of inbreeding </td>
 						<td><input placeholder="Type in the target increase in inbreeding. Use 0 to minimize." v-model="active_edge['ogc_aCa']"></td>
 					</tr>	
 
-					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_off']">
-						<td>Maximal # offspring
-							<span class="tooltip">&#9432 <span class="tooltiptext">Maximum number of offspring each individual from the parent node is allowed to have.</span></span>
-						</td>
-						<td><input placeholder="Type a number or Inf" v-model="active_edge['Max Offspring']"></td>
-					</tr>	
-					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_ratio']">
-						<td>Selection ratio
-							<span class="tooltip">&#9432 <span class="tooltiptext">Use this if you want to use some individuals more frequently for reproduction. A value of 2 will lead to the individual will the highest genomic value to be used twice as often as the worst individual.</span></span>
-						</td>
-						<td><input placeholder="Type a number (if nothing enter all individuals are picked equally)" v-model="active_edge['selection_ratio']"></td>
-					</tr>	
-					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_ratio']">
-						<td>Selection ratio type
-							<span class="tooltip">&#9432 <span class="tooltiptext">Use this if you want to use some individuals more frequently for reproduction. A value of 2 will lead to the individual will the highest genomic value to be used twice as often as the worst individual.</span></span>
-						</td>
-						<td> 
-							<select v-model="active_edge['selection_ratio_type']">
-								<option v-for="option in selection_type" v-bind:value="option">
-								{{ option}}
-								</option>
-							</select>
-						</td>					</tr>	
-					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] && (geninfo['advanced_advanced_ogc'] ||  geninfo['advanced_advanced_ratio'])">
-						<td>Index for Selection ratio / OGC
-							<span class="tooltip">&#9432 <span class="tooltiptext">Select the index used for the selection ratio or OGC. </span></span>
-						</td>
-						<td> 
-							<select v-model="active_edge['selection_ratio_index']">
-								<option v-for="option in selection_index" v-bind:value="option">
-								{{ option.Name }}
-								</option>
-							</select>
-						</td>
-					</tr>	
+
 					<tr v-if="active_edge['Breeding Type'] == 'Reproduction' && edge_operation == 'Add Edge'">
 						<td>ID of 2.parent </td> 
 						<td> 
@@ -342,18 +242,7 @@
 							<input list="indVar" placeholder="Type a number" v-model="active_edge['Number of Repeat']" onchange="updateVar('Number of Repeat', value)">
 						</td>
 					</tr>
-					<!--tr v-show="active_edge['Breeding Type'] == 'Recombination'">
-						<td>New Mutation Rate </td> 
-						<td> <input onchange="updateVar('New Mutation Rate', value)" placeholder="Type a number" v-model="active_edge['New Mutation Rate']" list="indVar"></td>
-					</tr>
-					<tr v-show="active_edge['Breeding Type'] == 'Recombination'">
-						<td>New Remutation Rate </td> 
-						<td> <input onchange="updateVar('New Remutation Rate', value)" placeholder="Type a number" v-model="active_edge['New Remutation Rate']" list="indVar"></td>
-					</tr>
-					<tr v-show="active_edge['Breeding Type'] == 'Recombination'">
-						<td>Number of Recombination per M </td> 
-						<td> <input onchange="updateVar('Number of Rec per M', value)" placeholder="Type a number" v-model="active_edge['Number of Rec per M']" list="indVar"></td>
-					</tr -->
+					
 					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 ">
 						<td>Selection Type
 							<span class="tooltip">&#9432 <span class="tooltiptext">Random: Each individual is taken with same probability, BVE/Pheno selected based on BVE/Phenotypes</span></span>
@@ -418,55 +307,6 @@
 						</td>
 					</tr>
 					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_thres']">
-						<td>Threshold for selection
-							<span class="tooltip">&#9432 <span class="tooltiptext">Calculate reliability of BVE according to vanRaden 2008</span></span>
-						</td>		
-						<td><input type="value" placeholder="Type a number if wanted" v-model="active_edge['threshold']"></td>
-					</tr>
-					
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_thres']">
-						<td>Threshold sign
-							<span class="tooltip">&#9432 <span class="tooltiptext"> Only keep individuals with higher/lower/eval estimated breeding value</span></span>
-						</td>		
-						<td> 
-							<select v-model="active_edge['threshold_sign']">
-								<option v-for="option in threshold_options" v-bind:value="option">
-								{{ option }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type']=='BVE' & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_reli']">
-						<td>Calculate reliability
-							<span class="tooltip">&#9432 <span class="tooltiptext">Calculate reliability of BVE according to vanRaden 2008</span></span>
-						</td>		
-						<td><input type="checkbox" false-value="No" true-value="Yes" v-model="active_edge['reliability']"> </td>
-					</tr>
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type']=='BVE' & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_skip']">
-						<td> Skip traits with no index weight
-							<span class="tooltip">&#9432 <span class="tooltiptext">Activating this will lead to not performing BVE that are not assign with any weight (=0) in the selection index.</span></span>
-						</td>		
-						<td><input type="checkbox" false-value="No" true-value="Yes" v-model="active_edge['skip']"> </td>
-					</tr>
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 & geninfo['advanced'] && geninfo['advanced_advanced'] & geninfo['advanced_advanced_pheno']">
-						<td>Input Phenotype
-							<span class="tooltip">&#9432 <span class="tooltiptext">Use the avg. phenotype of the offspring as the phenotype of the individuals in the parent node. Make sure there are offspring! (use of time needed!)</span></span>
-						</td>
-						<td>
-						<select v-model="active_edge['phenotype_used']">
-						
-								<option v-for="option in phenotype_options" v-bind:value="option">
-								{{ option }}
-								</option>
-								
-							</select>
-						</td>
-					</tr>
 					
 					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type'] == 'BVE'">
 						<td>Relationship Matrix
@@ -503,12 +343,7 @@
 						<td>Select cohorts for manuel select:
 							<span class="tooltip">&#9432 <span class="tooltiptext">Cohorts available for selection are only refresh on reloading or when EDITING an edge. We are working on that.</span></span>
 						</td>
-				<!--		<td v-if="isCohortNameChanged ===''" >						
-							<treeselect :value-consists-of="'LEAF_PRIORITY'" :multiple="true" :options="node_manualselect_options" v-model="active_edge['Manuel selected cohorts']" :searchable="true"/>
-						</td>
-						<td v-if="isCohortNameChanged ==='Yes'" >	
-							<treeselect :value-consists-of="'LEAF_PRIORITY'" :multiple="true" :options="updated_manualselect_options" v-model="active_edge['Manuel selected cohorts']" :searchable="true"/>
-						</td> -->
+				
 						<td v-if="isCohortNameChanged ==='' && edge_operation === ('Add Edge')" >						
 							<treeselect :value-consists-of="'LEAF_PRIORITY'" :multiple="true" :options="allNode_manualselect_options" v-model="active_edge['Manuel selected cohorts']" :searchable="true"/>
 						</td>
@@ -557,10 +392,10 @@
 		
 	
 	<!-- Eigene Javascripte Main Code -->
-	<script type="text/javascript" src="javascript/home.js"></script>
+	<script type="text/javascript" src="javascript/home_asr.js"></script>
 
 	<!-- Eigene Javascripte Checking and additional Services -->
-	<script type="text/javascript" src="javascript/Check_Services.js"></script>
+	<script type="text/javascript" src="javascript/Check_Services_asr.js"></script>
 
 	<!-- Node and Edge PopUp draggable -->
 	<script type="text/javascript" src="javascript/node_edge_draggable.js"></script>
