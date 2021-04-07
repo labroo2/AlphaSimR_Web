@@ -216,6 +216,7 @@ var data_Vue = new Vue({
 	el: '#mainDiv',
 	
 	data: {
+        asr_network_title : "Draw ASR Scheme:", 
 		// params for general information:
 		geninfo: geninfo,
 		traitsinfo: [],
@@ -243,7 +244,7 @@ var data_Vue = new Vue({
 		selection_type : ['Phenotype', 'Breeding Value', 'Genomic Value'],
 		selection_index : [{'Name': 'Default Index'}, {'Name': 'Non'}],
 		selection_index_scaling : [{'Name': 'Default Index', 'active_scaling': false, 'miesenberger': false, 'w_scaling': 'Per Unit'}, {'Name': 'Non', 'active_scaling': false, 'miesenberger': false, 'w_scaling': 'Per Unit'}],
-		phenotyping_class : [{'Name': 'Fully phenotyped', 'Cost of phenotyping': 0}, {'Name': 'Not phenotyped', 'Cost of phenotyping': 0}],
+		phenotyping_class : [{'Name': 'Fully phenotyped', 'Cost of phenotyping': 0}, {'Name': 'Not phenotyped', 'Cost of phenotyping': 0}],  // TV OK
 		phenotype_options: ['Own phenotype', 'Avg. offspring phenotype', 'Mean own/offspring phenotype', 'Weighted own/offspring phenotype'],
 		show_warnings: true,
 		warnings: [],
@@ -275,28 +276,28 @@ var data_Vue = new Vue({
 		// params for nodes and edges:
 		nodes: nodes,
 		edges: edges,
-		active_node:'',
-		active_edge:  new myEdge(),
-		node_operation: '',
-		edge_operation: '',
-		Sex_options: ['Male', 'Female', 'Both', 'Indefinit'],
+		active_node:'', // TV OK placeholder for multiple vars such as: .individualsVar .Founder ['Genotype generation'] .Path .phasing_required .Sex
+		active_edge:  new myEdge(), // TV OK
+		node_operation: '',  // TV OK
+		edge_operation: '',  // TV OK
+		Sex_options: ['Male', 'Female', 'Both', 'Indefinit'], // TV OK
 		Sex_options2: ['Male', 'Female', 'Both'],
-		node_colors: {'Male':'#9acef4', 'Female':'#f29595', 'Both':'#ddd264'},
-		edge_colors: {'Selection':'#7bbb44', 'Reproduction':'#f5a623', 'Aging':'#dba59a', 'Combine':'#5a4f7c', 'Repeat':'#f14235',
+		node_colors: {'Male':'#9acef4', 'Female':'#f29595', 'Both':'#ddd264'}, // TV OK
+		edge_colors: {'Selection':'#7bbb44', 'Reproduction':'#f5a623', 'Aging':'#dba59a', 'Combine':'#5a4f7c', 'Repeat':'#f14235', // TV OK
 							'Split': '#94db8e', 'Cloning':'#9932CC', 'Selfing':'#ff90b7', 'DH-Production':'#aa76fd',
-							'Semen-collection': '#483D8B'},
+							'Semen-collection': '#483D8B', 'Crossing': '#A6CEE3'},
 		counter_pheno: 0,
 		counter_qtl:0,
 		counter_qtl_sub:0,
 		
-		individualsVar_options: [],
+		individualsVar_options: [],  // TV OK
 		plottingType: ["By Repeats", "By Cohorts", "By Time"],
 		plottingType2: ["By Repeats", "By Time"],
 		download_data: ["VCF", "Ped", "Map", "Plain Genotypes", "Phenotypes", "Genomic Values", "Est. Breeding Values", "Pedigree"],
 		threshold_options: [">", "=", "<", ">=", "<="],
 		list_cohorts: [],		
-		Genotype_generation_options: ["Upload Genotypes", "Random-sampling", "Fully-homozygous", "Fully-heterozygous", "All-B-Allele", "All-A-Allele"],
-		Breedingtype_options: ['Selection', 'Reproduction', 'Aging', 'Combine', 'Repeat', 'Split', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection'],
+		Genotype_generation_options: ["Upload Genotypes", "Random-sampling", "Fully-homozygous", "Fully-heterozygous", "All-B-Allele", "All-A-Allele"], // TV OK
+		Breedingtype_options: ['Selection', 'Reproduction', 'Aging', 'Combine', 'Repeat', 'Split', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection', 'Crossing'],
 		selectionType_options: ['Phenotypic', 'Random', 'BVE', 'Pseudo-BVE' ],
 		RelationshipMatrix_options: ['VanRaden', 'Pedigree', 'Single Step'],
 		BVEMethod_options: ['Direct Mixed-Model', 'REML-GBLUP (EMMREML)', 'REML-GBLUP (rrBLUP)', 'REML-GBLUP (sommer)', 'Multi-trait REML-GBLUP (sommer)', 'Marker assisted selection (lm)', 'BayesA (BGLR)', 'BayesB (BGLR)', 'BayesC (BGLR)', 'RKHS (BGLR)', 'BL (BGLR)', 'BRR (BGLR)'],
@@ -1354,6 +1355,7 @@ function getJSONFromDrive(event) {
  }
  
 // TV ************************************ KEEP  *********************************************
+
 function importNetwork_intern(inputData1) {
 	data_Vue.active_edge = new myEdge();
 	if(data_Vue.runned){
@@ -1596,14 +1598,14 @@ function importNetwork_intern(inputData1) {
 		data_Vue.matrix = [];
 		data_Vue.matrix2 = [];		
 	}
-	loadCohortInfoFromServer(data_Vue.geninfo['Project Name']);
-	loadCohortTimeInfoFromServer(data_Vue.geninfo['Project Name']);
+/* 	loadCohortInfoFromServer(data_Vue.geninfo['Project Name']);
+	loadCohortTimeInfoFromServer(data_Vue.geninfo['Project Name']); */
 	
 	draw();
 	console.log("Loading Data successful.");
 	data_Vue.project_saved = true;
 	showCorrDiv("true");
-	 
+	
 }
 
 function resizeExportArea() {
@@ -1611,7 +1613,7 @@ function resizeExportArea() {
 }
 
 //function to Load Coghort information from Server
-function loadCohortInfoFromServer(name) {
+/* function loadCohortInfoFromServer(name) {
 	$.ajax
 	({
 		type: "GET",
@@ -1624,10 +1626,10 @@ function loadCohortInfoFromServer(name) {
 				}
 			}		
 	})
-}
+} */
 
 //function to Load Coghort information from Server
-function loadCohortTimeInfoFromServer(name) {
+/* function loadCohortTimeInfoFromServer(name) {
 	$.ajax
 	({
 		type: "GET",
@@ -1640,7 +1642,7 @@ function loadCohortTimeInfoFromServer(name) {
 				}
 			}		
 	})
-}
+} */
 
 //csv to JSON to get list of Cohorts in json format
 
@@ -1665,7 +1667,7 @@ function csvToJSON(cohorts) {
 
 // function to save data to database:
 
-function postProject(name, url, jsondata){
+/* function postProject(name, url, jsondata){
 	$.ajax
 	({
 		type: "POST",
@@ -1715,7 +1717,7 @@ function FilterDatabase(){
 		}
 	}
 	data_Vue.database2 = database2;
-}
+} */
 
 
 function saveProject(name) {
@@ -1743,7 +1745,7 @@ function saveProject(name) {
 	}
 }
 
-function deleteProject() {
+/* function deleteProject() {
 	var name = data_Vue.geninfo['Project Name'];
 	
 	if(data_Vue.database.filter(function(x){return(x == name)}).length > 0){
@@ -1768,7 +1770,7 @@ function deleteProject() {
 			});	
 		}
 	}
-}
+} */
 
 function saveProjectAs() {
 	document.getElementById("SaveAs_Div").style.display = 'block';
@@ -2166,13 +2168,13 @@ function saveEdgeData(data, callback) {
 // TV: function called onload body
 function init() {
   draw();
-  updateUser();
+  //TV updateUser();
   isSafari();  
 }
 
 
 //******************* If the User take data from database, then load them here **********/
-function updateUser(){
+/* function updateUser(){
 	$.get('/user', function(dat){
 		console.log(dat)
 		data_Vue.user = dat.username;
@@ -2192,7 +2194,7 @@ function updateUser(){
 	})
 	data_Vue.project_saved = true;
 	localStorage.clear();
-}
+} */
 
 // TV: probably function used to tackle bug occuring with Safari
 function isSafari() {
@@ -2200,7 +2202,7 @@ function isSafari() {
 	data_Vue.isDraggableOption='No';
 }
 
-function loadData(ind){
+/* function loadData(ind){
 	data_Vue.allNodesforNewEdge = [];
 	localStorage.clear();
 	sessionStorage.clear();
@@ -2240,7 +2242,7 @@ function loadData(ind){
 	}else{
 		location.reload();
 	}
-}
+} */
 
 function loadVersion(ind){
 	if(ind != "recent"){

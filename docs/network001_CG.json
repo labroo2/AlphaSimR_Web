@@ -1,0 +1,492 @@
+{
+  "Nodes": [
+    {
+      "id": "Crossing Block",
+      "Number of Individuals": "",
+      "x": -318,
+      "y": -295,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Crossing Block ()",
+      "color": "#9acef4",
+      "title": "Crossing Block:  Ind"
+    },
+    {
+      "id": "Seedling Nursery",
+      "Number of Individuals": "",
+      "x": -318,
+      "y": -204,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Seedling Nursery ()",
+      "color": "#9acef4",
+      "title": "Seedling Nursery:  Ind"
+    },
+    {
+      "id": "Clonal Evaluation Trial",
+      "Number of Individuals": "",
+      "x": -320,
+      "y": -119,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Clonal Evaluation Trial ()",
+      "color": "#9acef4",
+      "title": "Clonal Evaluation Trial:  Ind"
+    },
+    {
+      "id": "Preliminary Yield Trial",
+      "Number of Individuals": "",
+      "x": -327,
+      "y": -27,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Preliminary Yield Trial ()",
+      "color": "#9acef4",
+      "title": "Preliminary Yield Trial:  Ind"
+    },
+    {
+      "id": "Advanced Yield Trial",
+      "Number of Individuals": "",
+      "x": -324,
+      "y": 70,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Advanced Yield Trial ()",
+      "color": "#9acef4",
+      "title": "Advanced Yield Trial:  Ind"
+    },
+    {
+      "id": "Uniform Yield Trial 1",
+      "Number of Individuals": "",
+      "x": -317,
+      "y": 154,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Uniform Yield Trial 1 ()",
+      "color": "#9acef4",
+      "title": "Uniform Yield Trial 1:  Ind"
+    },
+    {
+      "id": "Uniform Yield Trial 2",
+      "Number of Individuals": "",
+      "x": -317,
+      "y": 239,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Uniform Yield Trial 2 ()",
+      "color": "#9acef4",
+      "title": "Uniform Yield Trial 2:  Ind"
+    },
+    {
+      "id": "?",
+      "Number of Individuals": "",
+      "x": 63,
+      "y": -33,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "? ()",
+      "color": "#9acef4",
+      "title": "?:  Ind"
+    }
+  ],
+  "Edges": [
+    {
+      "from": "Crossing Block",
+      "to": "Seedling Nursery",
+      "Breeding Type": "Crossing",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": "10",
+      "id": "a_f",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#A6CEE3",
+        "highlight": "#A6CEE3",
+        "hover": "#A6CEE3"
+      },
+      "title": "Crossing"
+    },
+    {
+      "from": "Seedling Nursery",
+      "to": "Clonal Evaluation Trial",
+      "Breeding Type": "Selection",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": 0,
+      "id": "Seedling Nursery_Clonal Evaluation Trial",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#7bbb44",
+        "highlight": "#7bbb44",
+        "hover": "#7bbb44"
+      },
+      "title": "Selection Type: Random"
+    },
+    {
+      "from": "Clonal Evaluation Trial",
+      "to": "Preliminary Yield Trial",
+      "Breeding Type": "Selection",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": 0,
+      "id": "Clonal Evaluation Trial_Preliminary Yield Trial",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#7bbb44",
+        "highlight": "#7bbb44",
+        "hover": "#7bbb44"
+      },
+      "title": "Selection Type: Random"
+    },
+    {
+      "from": "Preliminary Yield Trial",
+      "to": "Advanced Yield Trial",
+      "Breeding Type": "Selection",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": 0,
+      "id": "Preliminary Yield Trial_Advanced Yield Trial",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#7bbb44",
+        "highlight": "#7bbb44",
+        "hover": "#7bbb44"
+      },
+      "title": "Selection Type: Random"
+    },
+    {
+      "from": "Advanced Yield Trial",
+      "to": "Uniform Yield Trial 1",
+      "Breeding Type": "Selection",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": 0,
+      "id": "Advanced Yield Trial_Uniform Yield Trial 1",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#7bbb44",
+        "highlight": "#7bbb44",
+        "hover": "#7bbb44"
+      },
+      "title": "Selection Type: Random"
+    },
+    {
+      "from": "Uniform Yield Trial 1",
+      "to": "Uniform Yield Trial 2",
+      "Breeding Type": "Selection",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": 0,
+      "id": "Uniform Yield Trial 1_Uniform Yield Trial 2",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#7bbb44",
+        "highlight": "#7bbb44",
+        "hover": "#7bbb44"
+      },
+      "title": "Selection Type: Random"
+    },
+    {
+      "from": "Preliminary Yield Trial",
+      "to": "?",
+      "Breeding Type": "Selection",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": 0,
+      "id": "Preliminary Yield Trial_?",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#7bbb44",
+        "highlight": "#7bbb44",
+        "hover": "#7bbb44"
+      },
+      "title": "Selection Type: Random"
+    },
+    {
+      "from": "Advanced Yield Trial",
+      "to": "?",
+      "Breeding Type": "Selection",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": 0,
+      "id": "Advanced Yield Trial_?",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#7bbb44",
+        "highlight": "#7bbb44",
+        "hover": "#7bbb44"
+      },
+      "title": "Selection Type: Random"
+    },
+    {
+      "from": "?",
+      "to": "Crossing Block",
+      "Breeding Type": "Selection",
+      "Selection Type": "Random",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": 0,
+      "id": "?_Crossing Block",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#7bbb44",
+        "highlight": "#7bbb44",
+        "hover": "#7bbb44"
+      },
+      "title": "Selection Type: Random"
+    }
+  ],
+  "Genomic Info": {
+    "Project Name": "",
+    "Species": "",
+    "Use Ensembl Map": "Yes",
+    "Ensembl Dataset": "",
+    "Max Number of SNPs": 5000,
+    "number-simulations": 1,
+    "number-simulations-parallel": 1,
+    "number-simulations-core": 1,
+    "Number of Chromosomes": "",
+    "Chromosomes of Equal Length": "Yes",
+    "Time Unit": "Weeks",
+    "Use Own Map": "Yes",
+    "Own Map Path": "",
+    "Chromosomes Info": [],
+    "Upload_CorrFile": "No",
+    "curUserGroup": "",
+    "Excel_File": "",
+    "user": ""
+  },
+  "Trait Info": [],
+  "Selection Index": [
+    {
+      "Name": "Default Index"
+    },
+    {
+      "Name": "Non"
+    }
+  ],
+  "Selection Index Scaling": [
+    {
+      "Name": "Default Index",
+      "active_scaling": false,
+      "miesenberger": false,
+      "w_scaling": "Per Unit"
+    },
+    {
+      "Name": "Non",
+      "active_scaling": false,
+      "miesenberger": false,
+      "w_scaling": "Per Unit"
+    }
+  ],
+  "Phenotyping Info": [
+    {
+      "Name": "Fully phenotyped",
+      "Cost of phenotyping": 0
+    },
+    {
+      "Name": "Not phenotyped",
+      "Cost of phenotyping": 0
+    }
+  ],
+  "Economy": {
+    "Fixed Cost": 0,
+    "Interest Rate": 0,
+    "Genotyping Cost": 50,
+    "Animal Housing Costs": [
+      {
+        "Name": "No Housing",
+        "Cost": 0
+      },
+      {
+        "Name": "Male individuals",
+        "Cost": 2000
+      },
+      {
+        "Name": "Female individuals",
+        "Cost": 3000
+      }
+    ]
+  },
+  "Culling": {
+    "culling_reasons": []
+  },
+  "Subpopulation": {
+    "subpopulation_list": [
+      {
+        "Name": "Population 1",
+        "beta1": 1,
+        "beta2": 1,
+        "share0": 0,
+        "share1": 0,
+        "fixed_freq": 0,
+        "QTL Info": []
+      }
+    ]
+  },
+  "Phenotypic Correlation": [],
+  "PhenotypicResidual": false,
+  "Genetic Correlation": [],
+  "Intern": {
+    "show_matrix_element": [],
+    "counter_pheno": 0,
+    "counter_qtl": 0,
+    "counter_qtl_sub": 0,
+    "individualsVar_options": [],
+    "genetic_data": "Ens",
+    "runned": false
+  },
+  "Class": ""
+}

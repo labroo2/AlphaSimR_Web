@@ -37,26 +37,12 @@
 		
 		
 	<div id='mainDiv'>
-		<h2> AlphaSimR Simulation Designer </h2> 
+		<h2> Simulation Network Designer </h2> 
 		
 		<div id="main">
 			<div id="Breeding_Scheme">
 
-				<h3> Draw Network </h3> 
-					
-					<button class="accordion"> Click here to read the guildelines for Breeding Scheme: </button>
-					<div class="guideline">
-						<p class="guidelines"> 
-							--Draw your breeding scheme in the following interactive environment.  <br>
-							--Add a Node : Click Edit -> Add Node  -> Click in an empty space to place a new node.  <br>
-							--Edit a Node : Select a Node from the diagram -> Click Edit Node <br>
-							--Drag a Node : Add/Edit a Node or Edge -> Use grey area to drag the Node/Edge display box. <br>
-							--Double-Click a Node/Edge : Display-only box appears for a node or edge. Need to click Edit Node to edit the node/edge.<br>
-							--Copy Node : Select a Node -> Right Click.
-						</p>									
-					</div> 
-				
-				<br>
+				<h3> {{ asr_network_title }} </h3> 
 
 				<div id="mynetwork_container" >
 					<div id="mynetwork_label"> <!-- Parse Legends for nodes and edges-->
@@ -118,6 +104,7 @@
 							</select>
 						</td>
 					</tr>
+					<!-- TV: to upload own genotypes needs RESTfull API on server (Node) to execute GenoUpload -->
 					<tr v-show="active_node.Founder == 'Yes' & active_node['Genotype generation'] == 'Upload Genotypes'">
 						<td>Upload genotypes (plink/vcf)
 							<span class="tooltip">&#9432 <span class="tooltiptext">You can provide a dataset in plink/vcf format. Only used markers that are included in the map. Make sure your dataset is phased or activate phasing via checking Phasing required! </span></span>
@@ -129,7 +116,6 @@
 							</form>
 						</td>
 					</tr>
-
 					<tr v-show="active_node.Founder == 'Yes' & active_node['Genotype generation'] == 'Upload Genotypes' ">
 						<td> Path genotypes </td><td>{{active_node.Path}}</td>
 					</tr>	
@@ -154,6 +140,10 @@
 							</select>
 						</td>
 					</tr>
+					<tr v-show="active_node.Sex == 'Both'">
+						<td>Proportion of Male</td>
+						<td> <input placeholder="Type a number" type="number" max=1 min=0 step=0.001 v-model="active_node['Proportion of Male']"> </td>
+					</tr>
 					<tr>
 						<td>Phenotyping Class
 							<span class="tooltip">&#9432 <span class="tooltiptext">Choose one of the phenotyping classes generated prior. Default is observation of all traits.</span></span>
@@ -166,16 +156,13 @@
 							</select>
 						</td>
 					</tr>
-
-					<tr v-show="active_node.Sex == 'Both'">
-						<td>Proportion of Male</td>
-						<td> <input placeholder="Type a number" type="number" max=1 min=0 step=0.001 v-model="active_node['Proportion of Male']"> </td>
-					</tr>
 				</table>
 				<br>
 				<input class='button_type' type="button" value="Save" id="node-saveButton" />
 				<input class='button_type' type="button" value="Cancel" id="node-cancelButton" />
-			</div>
+			</div> <!-- ENDOF node-popUp div-->
+
+
 			<div id="edge-popUp" onclick="checkEverything(this.id)">
 				
 				<div id="edge-popUpheader"> 
@@ -211,7 +198,7 @@
 							</datalist>
 						</td>
 					</tr>
-					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production','Semen-collection', 'Aging', 'Selection', 'Split','Combine'].indexOf(active_edge['Breeding Type']) >= 0 ">
+					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production','Semen-collection', 'Aging', 'Selection', 'Split','Combine', 'Crossing'].indexOf(active_edge['Breeding Type']) >= 0 ">
 						<td>Time needed
 							<span class="tooltip">&#9432 <span class="tooltiptext">Provide the time this breeding action takes. Reproduction currently needs at least one time unit.</span></span>
 						</td>
@@ -360,6 +347,7 @@
 				<input class='button_type' type="button" value="Save" id="edge-saveButton" />
 				<input class='button_type' type="button" value="Cancel" id="edge-cancelButton" />
 			</div> <!-- ENDOF edge pop-up-->
+			
 				<br>
 				<br>
 				
@@ -375,6 +363,7 @@
                 <span class="tooltip">&#9432 <span class="tooltiptext">
                     <p> Import JSON-project from the Output Area below
                 </p> </span></span>
+				<button class='bar_button' id="save_button" onclick="saveProject();">SAVE</button> <!-- TV added as it is required to set status for import JSON bnt-->
                 <br>
                 <br>
                 
