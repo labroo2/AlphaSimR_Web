@@ -282,7 +282,9 @@ var data_Vue = new Vue({
 		edge_operation: '',  // TV OK
 		Sex_options: ['Male', 'Female', 'Both', 'Indefinit'], // TV OK
 		Sex_options2: ['Male', 'Female', 'Both'],
-		node_colors: {'Male':'#9acef4', 'Female':'#f29595', 'Both':'#ddd264'}, // TV OK
+		node_types: ['Yield trial', 'Increase', 'Crossing block'], // TV new
+		// TV node_colors: {'Male':'#9acef4', 'Female':'#f29595', 'Both':'#ddd264'}, 
+		node_colors: {'Yield trial':'#9acef4', 'Increase':'#f29595', 'Crossing block':'#ddd264'}, // TV NEW
 		edge_colors: {'Selection':'#7bbb44', 'Reproduction':'#f5a623', 'Aging':'#dba59a', 'Combine':'#5a4f7c', 'Repeat':'#f14235', // TV OK
 							'Split': '#94db8e', 'Cloning':'#9932CC', 'Selfing':'#ff90b7', 'DH-Production':'#aa76fd',
 							'Semen-collection': '#483D8B', 'Crossing': '#A6CEE3'},
@@ -482,9 +484,14 @@ var data_Vue = new Vue({
 				return this.geninfo['Chromosomes Info'].slice(0,this.geninfo['Number of Chromosomes']);
 			},
 		},
-		node_color: {
+/* 		node_color: {
 			get: function(){
 				return this.node_colors[this.active_node.Sex];
+			},
+		}, */
+		node_color: {
+			get: function(){
+				return this.node_colors[this.active_node.Type];
 			},
 		},
 		node_title: {
@@ -1983,7 +1990,8 @@ function my_cancelEdgeEdit() {
 
 function addNode_extern(data) {
 	data.label = data.id;
-	data.color = data_Vue.node_colors[data.Sex];
+	//TV data.color = data_Vue.node_colors[data.Sex];
+	data.color = data_Vue.node_colors[data.Type]; // TV new
 	data.title = data_Vue.id + ':' + data['Number of Individuals'] + 'Ind';
 	if(data['Sex'] != "Both"){
 		data['Proportion of Male'] = data.Sex == 'Male' ? 1 : 0;

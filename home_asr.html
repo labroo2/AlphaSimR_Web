@@ -127,7 +127,18 @@
 							<input type="checkbox" false-value="No" true-value="Yes" v-model="active_node.phasing_required">
 						</td>
 					</tr>
-			
+					<tr> <!-- TV new -->
+						<td>Type
+							<span class="tooltip">&#9432 <span class="tooltiptext">Type of node</span></span>
+						</td>
+						<td> 
+							<select v-model="active_node.Type">
+								<option v-for="option in node_types" v-bind:value="option">
+								{{ option }}
+								</option>
+							</select>
+						</td>
+					</tr>
 					<tr>
 						<td>Sex
 							<span class="tooltip">&#9432 <span class="tooltiptext">Sex of the individuals in this cohort</span></span>
