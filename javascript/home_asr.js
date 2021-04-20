@@ -496,7 +496,7 @@ var data_Vue = new Vue({
 		},
 		node_title: {
 			get: function(){
-				return this.active_node.id + ': '+ this.active_node['Number of Individuals'] + ' Ind';
+				return this.active_node.id + ': '+ this.active_node['Number of Individuals'] + ' entries';
 			},
 		},
 		edge_title: {

@@ -74,16 +74,36 @@
 						</td><td><input type="text" placeholder="Type a name" v-model="active_node.id" ></td>
 					</tr>
 					<tr>
-						<td>Number of individuals
-							<span class="tooltip">&#9432 <span class="tooltiptext">Number of individuals in this cohort</span></span>
+						<td>Number of entries
+							<span class="tooltip">&#9432 <span class="tooltiptext">Number of entries</span></span>
 						</td>
-						<td><input type="text" placeholder="Type number/Select variable" id="individuals" list="indVar" v-model="active_node.individualsVar" onchange="updateIndividuals(value)">
+						<td><input type="text" placeholder="Type integer" id="individuals" list="indVar" v-model="active_node.individualsVar" onchange="updateIndividuals(value)">
 							<datalist id="indVar">
 								<option v-for="ivar in individualsVar_options" v-bind:value="ivar.name">
 							</datalist>
 						</td>	
 					</tr>
-					
+					<tr>
+						<td>Number of locations
+							<span class="tooltip">&#9432 <span class="tooltiptext">Number of locations</span></span>
+						</td>
+						<td><input type="text" placeholder="Type integer" id="locations" list="locVar" v-model="active_node.locationsVar" onchange="updateLocations(value)">
+							<datalist id="locVar">
+								<option v-for="lvar in locationsVar_options" v-bind:value="lvar.name">
+							</datalist>
+						</td>	
+					</tr>
+					<tr>
+						<td>Number of replications
+							<span class="tooltip">&#9432 <span class="tooltiptext">Number of replications</span></span>
+						</td>
+						<td><input type="text" placeholder="Type integer" id="replications" list="repVar" v-model="active_node.replicationsVar" onchange="updateReplications(value)">
+							<datalist id="repVar">
+								<option v-for="rvar in replicationsVar_options" v-bind:value="rvar.name">
+							</datalist>
+						</td>	
+					</tr>
+					<!-- TV: to upload own genotypes needs RESTfull API on server (Node) to execute GenoUpload 
 					<tr>
 						<td>Founder
 							<span class="tooltip">&#9432 <span class="tooltiptext">Are the individuals in this cohort founders or are they generated?</span></span>
@@ -104,7 +124,6 @@
 							</select>
 						</td>
 					</tr>
-					<!-- TV: to upload own genotypes needs RESTfull API on server (Node) to execute GenoUpload -->
 					<tr v-show="active_node.Founder == 'Yes' & active_node['Genotype generation'] == 'Upload Genotypes'">
 						<td>Upload genotypes (plink/vcf)
 							<span class="tooltip">&#9432 <span class="tooltiptext">You can provide a dataset in plink/vcf format. Only used markers that are included in the map. Make sure your dataset is phased or activate phasing via checking Phasing required! </span></span>
@@ -127,6 +146,7 @@
 							<input type="checkbox" false-value="No" true-value="Yes" v-model="active_node.phasing_required">
 						</td>
 					</tr>
+					-->
 					<tr> <!-- TV new -->
 						<td>Type
 							<span class="tooltip">&#9432 <span class="tooltiptext">Type of node</span></span>
@@ -139,6 +159,7 @@
 							</select>
 						</td>
 					</tr>
+					<!--
 					<tr>
 						<td>Sex
 							<span class="tooltip">&#9432 <span class="tooltiptext">Sex of the individuals in this cohort</span></span>
@@ -167,6 +188,7 @@
 							</select>
 						</td>
 					</tr>
+				-->
 				</table>
 				<br>
 				<input class='button_type' type="button" value="Save" id="node-saveButton" />
