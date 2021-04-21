@@ -285,9 +285,8 @@ var data_Vue = new Vue({
 		node_types: ['Yield trial', 'Increase', 'Crossing block'], // TV new
 		// TV node_colors: {'Male':'#9acef4', 'Female':'#f29595', 'Both':'#ddd264'}, 
 		node_colors: {'Yield trial':'#9acef4', 'Increase':'#f29595', 'Crossing block':'#ddd264'}, // TV NEW
-		edge_colors: {'Selection':'#7bbb44', 'Reproduction':'#f5a623', 'Aging':'#dba59a', 'Combine':'#5a4f7c', 'Repeat':'#f14235', // TV OK
-							'Split': '#94db8e', 'Cloning':'#9932CC', 'Selfing':'#ff90b7', 'DH-Production':'#aa76fd',
-							'Semen-collection': '#483D8B', 'Crossing': '#A6CEE3'},
+		edge_colors: {'Selection':'#7bbb44', 'Cloning':'#9932CC', 'Crossing': '#ddd264'},
+					//TV {'Selection':'#7bbb44', 'Reproduction':'#f5a623', 'Aging':'#dba59a', 'Combine':'#5a4f7c', 'Repeat':'#f14235', 'Split': '#94db8e', 'Cloning':'#9932CC', 'Selfing':'#ff90b7', 'DH-Production':'#aa76fd','Semen-collection': '#483D8B', 'Crossing': '#A6CEE3'},
 		counter_pheno: 0,
 		counter_qtl:0,
 		counter_qtl_sub:0,
@@ -299,7 +298,7 @@ var data_Vue = new Vue({
 		threshold_options: [">", "=", "<", ">=", "<="],
 		list_cohorts: [],		
 		Genotype_generation_options: ["Upload Genotypes", "Random-sampling", "Fully-homozygous", "Fully-heterozygous", "All-B-Allele", "All-A-Allele"], // TV OK
-		Breedingtype_options: ['Selection', 'Reproduction', 'Aging', 'Combine', 'Repeat', 'Split', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection', 'Crossing'],
+		Breedingtype_options: ['Selection', 'Cloning', 'Crossing'], //TV ['Selection', 'Reproduction', 'Aging', 'Combine', 'Repeat', 'Split', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection', 'Crossing'],
 		selectionType_options: ['Phenotypic', 'Random', 'BVE', 'Pseudo-BVE' ],
 		RelationshipMatrix_options: ['VanRaden', 'Pedigree', 'Single Step'],
 		BVEMethod_options: ['Direct Mixed-Model', 'REML-GBLUP (EMMREML)', 'REML-GBLUP (rrBLUP)', 'REML-GBLUP (sommer)', 'Multi-trait REML-GBLUP (sommer)', 'Marker assisted selection (lm)', 'BayesA (BGLR)', 'BayesB (BGLR)', 'BayesC (BGLR)', 'RKHS (BGLR)', 'BL (BGLR)', 'BRR (BGLR)'],

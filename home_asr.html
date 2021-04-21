@@ -74,6 +74,18 @@
 						</td><td><input type="text" placeholder="Type a name" v-model="active_node.id" ></td>
 					</tr>
 					<tr>
+						<td>Type
+							<span class="tooltip">&#9432 <span class="tooltiptext">Type of node</span></span>
+						</td>
+						<td> 
+							<select v-model="active_node.Type">
+								<option v-for="option in node_types" v-bind:value="option">
+								{{ option }}
+								</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td>Number of entries
 							<span class="tooltip">&#9432 <span class="tooltiptext">Number of entries</span></span>
 						</td>
@@ -83,7 +95,7 @@
 							</datalist>
 						</td>	
 					</tr>
-					<tr>
+					<tr v-show="active_node.Type == 'Yield trial'">
 						<td>Number of locations
 							<span class="tooltip">&#9432 <span class="tooltiptext">Number of locations</span></span>
 						</td>
@@ -93,13 +105,23 @@
 							</datalist>
 						</td>	
 					</tr>
-					<tr>
+					<tr v-show="active_node.Type == 'Yield trial'">
 						<td>Number of replications
 							<span class="tooltip">&#9432 <span class="tooltiptext">Number of replications</span></span>
 						</td>
 						<td><input type="text" placeholder="Type integer" id="replications" list="repVar" v-model="active_node.replicationsVar" onchange="updateReplications(value)">
 							<datalist id="repVar">
 								<option v-for="rvar in replicationsVar_options" v-bind:value="rvar.name">
+							</datalist>
+						</td>	
+					</tr>
+					<tr>
+						<td>Seasons
+							<span class="tooltip">&#9432 <span class="tooltiptext">Seasons</span></span>
+						</td>
+						<td><input type="text" placeholder="Type integer" id="seasons" list="seaVar" v-model="active_node.seasonsVar" onchange="updateSeasons(value)">
+							<datalist id="seaVar">
+								<option v-for="svar in seasonsVar_options" v-bind:value="svar.name">
 							</datalist>
 						</td>	
 					</tr>
@@ -146,20 +168,6 @@
 							<input type="checkbox" false-value="No" true-value="Yes" v-model="active_node.phasing_required">
 						</td>
 					</tr>
-					-->
-					<tr> <!-- TV new -->
-						<td>Type
-							<span class="tooltip">&#9432 <span class="tooltiptext">Type of node</span></span>
-						</td>
-						<td> 
-							<select v-model="active_node.Type">
-								<option v-for="option in node_types" v-bind:value="option">
-								{{ option }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					<!--
 					<tr>
 						<td>Sex
 							<span class="tooltip">&#9432 <span class="tooltiptext">Sex of the individuals in this cohort</span></span>
