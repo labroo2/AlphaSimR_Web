@@ -300,6 +300,11 @@ var data_Vue = new Vue({
 		Genotype_generation_options: ["Upload Genotypes", "Random-sampling", "Fully-homozygous", "Fully-heterozygous", "All-B-Allele", "All-A-Allele"], // TV OK
 		Breedingtype_options: ['Selection', 'Cloning', 'Crossing'], //TV ['Selection', 'Reproduction', 'Aging', 'Combine', 'Repeat', 'Split', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection', 'Crossing'],
 		selectionType_options: ['Phenotypic', 'Random', 'BVE', 'Pseudo-BVE' ],
+
+		selectionUnit_options: ['All', 'Within Family', 'Between Family' ], // new options TV
+		selectionCriteria_options: ['Phenotype', 'Genetic Value', 'EBV', 'BV' ],
+		selectionTrait_options: ['Single Trait', 'Index' ],
+
 		RelationshipMatrix_options: ['VanRaden', 'Pedigree', 'Single Step'],
 		BVEMethod_options: ['Direct Mixed-Model', 'REML-GBLUP (EMMREML)', 'REML-GBLUP (rrBLUP)', 'REML-GBLUP (sommer)', 'Multi-trait REML-GBLUP (sommer)', 'Marker assisted selection (lm)', 'BayesA (BGLR)', 'BayesB (BGLR)', 'BayesC (BGLR)', 'RKHS (BGLR)', 'BL (BGLR)', 'BRR (BGLR)'],
 		Cohorts_options: ['Only this cohort', 'Last Generation', 'Last 2 Generations', 'Last 3 Generations', 'All',  'Manual select'],

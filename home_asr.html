@@ -228,7 +228,73 @@
 							</select>
 						</td>
 					</tr>
-					<tr v-if="active_edge['Breeding Type'] == 'Split' && edge_operation == 'Add Edge'">
+					<tr v-if="active_edge['Breeding Type'] == 'Crossing'">
+						<td>Number of crosses
+							<span class="tooltip">&#9432 <span class="tooltiptext">Provide an integer for the number of crosses.</span></span>
+						</td>
+						<td><input type="text" placeholder="Type integer" id="crosses" list="croVar" v-model="active_node.crossesVar" onchange="updateCrosses(value)">
+							<datalist id="croVar">
+								<option v-for="cvar in crossesVar_options" v-bind:value="cvar.name">
+							</datalist>
+						</td>	
+					</tr>	
+					<tr v-if="active_edge['Breeding Type'] == 'Crossing'">
+						<td>Number of progeny per cross
+							<span class="tooltip">&#9432 <span class="tooltiptext">Provide an integer of the number of progeny per cross.</span></span>
+						</td>
+						<td><input type="text" placeholder="Type integer" id="progeny" list="proVar" v-model="active_node.progenyVar" onchange="updateProgeny(value)">
+							<datalist id="proVar">
+								<option v-for="pvar in progenyVar_options" v-bind:value="pvar.name">
+							</datalist>
+						</td>	
+					</tr>	
+					<tr v-if="active_edge['Breeding Type'] == 'Selection'">
+						<td>Unit
+							<span class="tooltip">&#9432 <span class="tooltiptext">Choose selection unit from list.</span></span>
+						</td>
+						<td>
+							<select v-model="active_edge.Unit">
+								<option v-for="option in selectionUnit_options" v-bind:value="option">
+								{{ option }}
+								</option>
+							</select>
+						</td>	
+					</tr>	
+					<tr v-if="active_edge['Breeding Type'] == 'Selection'">
+						<td>Criteria
+							<span class="tooltip">&#9432 <span class="tooltiptext">Choose selection criteria from list.</span></span>
+						</td>
+						<td>
+							<select v-model="active_edge.Criteria">
+								<option v-for="option in selectionCriteria_options" v-bind:value="option">
+								{{ option }}
+								</option>
+							</select>
+						</td>	
+					</tr>	
+					<tr v-if="active_edge['Breeding Type'] == 'Selection'">
+						<td>Trait
+							<span class="tooltip">&#9432 <span class="tooltiptext">Choose from list.</span></span>
+						</td>
+						<td>
+							<select v-model="active_edge.Trait">
+								<option v-for="option in selectionTrait_options" v-bind:value="option">
+								{{ option }}
+								</option>
+							</select>
+						</td>	
+					</tr>
+					<tr v-show="active_edge['Breeding Type'] == 'Selection' & active_edge.Unit == 'Between Family' ">
+						<td>Number of individuals/families
+							<span class="tooltip">&#9432 <span class="tooltiptext">Choose from list.</span></span>
+						</td>
+						<td><input type="text" placeholder="Type integer" id="between" list="betVar" v-model="active_edge.betweenVar" onchange="updateBetween(value)">
+							<datalist id="betVar">
+								<option v-for="bvar in betweenVar_options" v-bind:value="bvar.name">
+							</datalist>
+						</td>	
+					</tr>
+					<!-- <tr v-if="active_edge['Breeding Type'] == 'Split' && edge_operation == 'Add Edge'">
 						<td>ID of 2.Sub-Group
 							<span class="tooltip">&#9432 <span class="tooltiptext">Some breeding action require multiple cohorts</span></span>
 						</td>
@@ -330,7 +396,6 @@
 							<span class="tooltip">&#9432 <span class="tooltiptext">Selection intensity - the tool will automatically calculate this for you based on the size of the parent/child node.</span></span>
 						</td>
 						<td>
-							<!-- <input list="indVar" onchange="updateVar('Selection Proportion', value)" placeholder="Type a number" min="0" max="1" step="0.001" v-model="selection_proportion"> -->
 							{{ selection_proportion }} (calculated based on # Individuals)
 						</td>
 					</tr>
@@ -382,7 +447,7 @@
 							<treeselect :value-consists-of="'LEAF_PRIORITY'" :multiple="true" :options="updated_manualselect_options" v-model="active_edge['Manuel selected cohorts']" :searchable="true"/>
 						</td>
 
-					</tr>
+					</tr> -->
 				</table>
 				<br>
 				<input class='button_type' type="button" value="Save" id="edge-saveButton" />
