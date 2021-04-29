@@ -70,7 +70,7 @@
 					</colgroup>
 					<tr>
 						<td>Name
-							<span class="tooltip">&#9432 <span class="tooltiptext">Name of the cohort. Please avoid names with : or _ . In particular avoid trailing numbers like ABC_1. Repeated nodes will use this syntax!</span></span>
+							<span class="tooltip">&#9432 <span class="tooltiptext">Name of the node. Please avoid names with : or _ . In particular avoid trailing numbers like ABC_1. Repeated nodes will use this syntax!</span></span>
 						</td><td><input type="text" placeholder="Type a name" v-model="active_node.id" ></td>
 					</tr>
 					<tr>
@@ -125,78 +125,6 @@
 							</datalist>
 						</td>	
 					</tr>
-					<!-- TV: to upload own genotypes needs RESTfull API on server (Node) to execute GenoUpload 
-					<tr>
-						<td>Founder
-							<span class="tooltip">&#9432 <span class="tooltiptext">Are the individuals in this cohort founders or are they generated?</span></span>
-						</td>
-						<td> 
-							<input type="checkbox" false-value="No" true-value="Yes" v-model="active_node.Founder">
-						</td>
-					</tr>
-					<tr v-show="active_node.Founder == 'Yes'">
-						<td> Genotype generation type 
-							<span class="tooltip">&#9432 <span class="tooltiptext">How to generate genotypes/haplotypes for founder individuals</span></span>
-						</td>
-						<td>
-							<select v-model="active_node['Genotype generation']">
-								<option v-for="option in Genotype_generation_options" v-bind:value="option">
-								{{ option }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					<tr v-show="active_node.Founder == 'Yes' & active_node['Genotype generation'] == 'Upload Genotypes'">
-						<td>Upload genotypes (plink/vcf)
-							<span class="tooltip">&#9432 <span class="tooltiptext">You can provide a dataset in plink/vcf format. Only used markers that are included in the map. Make sure your dataset is phased or activate phasing via checking Phasing required! </span></span>
-						</td>
-						<td> 
-							<form id='GenoUpload' target="print_popup" action='http://mobps.de/GenoUpload' method='post' encType='multipart/form-data' onsubmit="window.open('about:blank','print_popup','width=1000,height=800'); setGenoPath();">
-								<input type='file' name='genoFile' id='genoFile'>
-								<input type='submit' value='Upload'>
-							</form>
-						</td>
-					</tr>
-					<tr v-show="active_node.Founder == 'Yes' & active_node['Genotype generation'] == 'Upload Genotypes' ">
-						<td> Path genotypes </td><td>{{active_node.Path}}</td>
-					</tr>	
-					<tr v-show="active_node.Founder == 'Yes' & active_node['Genotype generation'] == 'Upload Genotypes' ">
-						<td>Phasing required
-							<span class="tooltip">&#9432 <span class="tooltiptext">If imputation via BEAGLE 5.0 default will be automatically processed. This is using the MoBPS function pedmap.to.phasebeaglevcf(). It is not supported when running MoBPS on your own system as paths will usally not match! Contact Torsten if interested to use this locally.</span></span>
-						</td>
-						<td>
-							<input type="checkbox" false-value="No" true-value="Yes" v-model="active_node.phasing_required">
-						</td>
-					</tr>
-					<tr>
-						<td>Sex
-							<span class="tooltip">&#9432 <span class="tooltiptext">Sex of the individuals in this cohort</span></span>
-						</td>
-						<td> 
-							<select v-model="active_node.Sex">
-								<option v-for="option in Sex_options" v-bind:value="option">
-								{{ option }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					<tr v-show="active_node.Sex == 'Both'">
-						<td>Proportion of Male</td>
-						<td> <input placeholder="Type a number" type="number" max=1 min=0 step=0.001 v-model="active_node['Proportion of Male']"> </td>
-					</tr>
-					<tr>
-						<td>Phenotyping Class
-							<span class="tooltip">&#9432 <span class="tooltiptext">Choose one of the phenotyping classes generated prior. Default is observation of all traits.</span></span>
-						</td>
-						<td> 
-							<select v-model="active_node['Phenotyping Class']">
-								<option v-for="option in phenotyping_class" v-bind:value="option.Name">
-								{{ option.Name }}
-								</option>
-							</select>
-						</td>
-					</tr>
-				-->
 				</table>
 				<br>
 				<input class='button_type' type="button" value="Save" id="node-saveButton" />
@@ -285,8 +213,8 @@
 						</td>	
 					</tr>
 					<tr v-show="active_edge['Breeding Type'] == 'Selection' & active_edge.Unit == 'Between Family' ">
-						<td>Number of individuals/families
-							<span class="tooltip">&#9432 <span class="tooltiptext">Choose from list.</span></span>
+						<td>Number of Families/Inds
+							<span class="tooltip">&#9432 <span class="tooltiptext">Provide integer for the number of families or individuals for between family selection.</span></span>
 						</td>
 						<td><input type="text" placeholder="Type integer" id="between" list="betVar" v-model="active_edge.betweenVar" onchange="updateBetween(value)">
 							<datalist id="betVar">
@@ -294,160 +222,6 @@
 							</datalist>
 						</td>	
 					</tr>
-					<!-- <tr v-if="active_edge['Breeding Type'] == 'Split' && edge_operation == 'Add Edge'">
-						<td>ID of 2.Sub-Group
-							<span class="tooltip">&#9432 <span class="tooltiptext">Some breeding action require multiple cohorts</span></span>
-						</td>
-						<td> 
-							<input id="split_input" list="splits" placeholder="Create/Choose ID">
-							<datalist id="splits">
-								<option v-for="par in nodes.get()" v-if="par.Sex == nodes.get(active_edge.from).Sex & par.id != nodes.get(active_edge.to).id & par.id != nodes.get(active_edge.from).id" v-bind:value="par.id">
-							</datalist>
-						</td>
-					</tr>
-					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production','Semen-collection', 'Aging', 'Selection', 'Split','Combine', 'Crossing'].indexOf(active_edge['Breeding Type']) >= 0 ">
-						<td>Time needed
-							<span class="tooltip">&#9432 <span class="tooltiptext">Provide the time this breeding action takes. Reproduction currently needs at least one time unit.</span></span>
-						</td>
-						<td><input style="width:40px;border:2px solid lightblue;font-size:12pt;height:22px;" id="time_n" list="indVar" onchange="updateVar('Time Needed', value)" placeholder="Type a number" min="0" max="10000" step="1" v-model="active_edge['Time Needed']"> {{geninfo['Time Unit']}}</td>
-					</tr>	
-
-					
-					<tr v-if="['Reproduction', 'Cloning', 'Selfing', 'DH-Production', 'Semen-collection'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['OGC']=='Yes'">
-						<td>Maximum increase of inbreeding </td>
-						<td><input placeholder="Type in the target increase in inbreeding. Use 0 to minimize." v-model="active_edge['ogc_aCa']"></td>
-					</tr>	
-
-
-					<tr v-if="active_edge['Breeding Type'] == 'Reproduction' && edge_operation == 'Add Edge'">
-						<td>ID of 2.parent </td> 
-						<td> 
-							<input id="parents_input" list="parents" placeholder="Create/Choose ID">
-							<datalist id="parents">
-								<option v-for="par in nodes.get()" v-if="par.Sex != nodes.get(active_edge.from).Sex & par.id != nodes.get(active_edge.to).id" v-bind:value="par.id">
-							</datalist>
-						</td>
-					</tr>
-					<tr v-show="active_edge['Breeding Type'] == 'Repeat'">
-						<td>Number of Repeat 
-							<span class="tooltip">&#9432 <span class="tooltiptext">Number of times the Repeat is executed. The parent node will be the new input of the child node and everything in between is rerun. Nodes will be named the same + _1, _2, _3 etc.</span></span>
-						</td> 
-						<td> 
-							<input list="indVar" placeholder="Type a number" v-model="active_edge['Number of Repeat']" onchange="updateVar('Number of Repeat', value)">
-						</td>
-					</tr>
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 ">
-						<td>Selection Type
-							<span class="tooltip">&#9432 <span class="tooltiptext">Random: Each individual is taken with same probability, BVE/Pheno selected based on BVE/Phenotypes</span></span>
-						</td>
-						<td> 
-							<select v-model="active_edge['Selection Type']">
-								<option v-for="option in selectionType_options" v-bind:value="option">
-								{{ option }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type'] == 'BVE'">
-						<td>BVE Method
-							<span class="tooltip">&#9432 <span class="tooltiptext">Direct-Mixed-Model assumes known heritability and thereby is fastest. EMMREML/sommer use the respective R-package. Sommer also support multi-variable models but takes much longer! Bayesian models used are using BGLR. MAS is using lm() on randomly sampled effect markers.</span></span>
-						</td>
-						<td> 
-							<select v-model="active_edge['BVE Method']">
-								<option v-for="option in BVEMethod_options" v-bind:value="option">
-								{{ option }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type'] == 'BVE' & active_edge['BVE Method']=='Marker assisted selection (lm)'">
-						<td>Number of markers used for MAS
-							<span class="tooltip">&#9432 <span class="tooltiptext">This is a very simple implementation of MAS using a linear model of randomly sampled effect markers</span></span>
-						</td>
-						<td><input placeholder="Type a number or Inf" v-model="active_edge['MAS_marker']"></td>
-					</tr>
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 & active_edge['Selection Type']=='Pseudo-BVE'" v-for='(trait, index) in traitsinfo' >
-						<td>Accuracy for Trait {{ trait[["Trait Name"]] }} 
-							<span class="tooltip">&#9432 <span class="tooltiptext">If nothing is entered here the accuracy will be chosen according to the starting heritability</span></span>
-						</td>
-						<td>
-							<input v-model="active_edge[index]" style="width:80px;"> 
-						</td>
-					</tr>					
-					
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 & traitsinfo.length > 1">
-						<td>Selection Index
-						<span class="tooltip">&#9432 <span class="tooltiptext">Select which index to use for BVE/Phenotypic selection</span></span>
-						</td>
-						<td> 
-							<select v-model="active_edge['Selection Index']">
-								<option v-for="option in selection_index" v-bind:value="option.Name">
-								{{ option.Name }}
-								</option>
-							</select>
-						</td>
-					</tr>						
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0">
-						<td>Selection Proportion
-							<span class="tooltip">&#9432 <span class="tooltiptext">Selection intensity - the tool will automatically calculate this for you based on the size of the parent/child node.</span></span>
-						</td>
-						<td>
-							{{ selection_proportion }} (calculated based on # Individuals)
-						</td>
-					</tr>
-					
-					
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type'] == 'BVE'">
-						<td>Relationship Matrix
-							<span class="tooltip">&#9432 <span class="tooltiptext">According to vanRaden 2008, pedigree-based or singleStep (H based on Legarra 2014)</span></span>
-						</td>
-						<td> 
-							<select v-model="active_edge['Relationship Matrix']">
-								<option v-for="option in RelationshipMatrix_options" v-bind:value="option">
-								{{ option }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type'] == 'BVE' && ( active_edge['Relationship Matrix']== 'Single Step'|active_edge['Relationship Matrix']== 'Pedigree')">
-						<td>Depth of Pedigree (# generation back)
-							<span class="tooltip">&#9432 <span class="tooltiptext">Depth of the pedigree. All individuals before are assumed to be unrelated! If you need something else contact Torsten or use the R-package.</span></span>
-						</td> 
-						<td> <input type="value" onchange="updateVar('Depth of Pedigree', value)" placeholder="Type a number" v-model="active_edge['Depth of Pedigree']" list="indVar"></td>
-					</tr>
-
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type'] == 'BVE'">
-						<td>Cohorts used in BVE
-							<span class="tooltip">&#9432 <span class="tooltiptext">Manual select provides you with maximum flexibility to select which individuals to use.</span></span>
-						</td>
-						<td> 
-							<select v-model="active_edge['Cohorts used in BVE']">
-								<option v-for="option in Cohorts_options" v-bind:value="option">
-								{{ option }}
-								</option>
-							</select>
-						</td>
-					</tr>
-					<tr v-show="['Selection', 'Split', 'Aging'].indexOf(active_edge['Breeding Type']) >= 0 && active_edge['Selection Type'] == 'BVE' && active_edge['Cohorts used in BVE'] == 'Manual select'">
-						<td>Select cohorts for manuel select:
-							<span class="tooltip">&#9432 <span class="tooltiptext">Cohorts available for selection are only refresh on reloading or when EDITING an edge. We are working on that.</span></span>
-						</td>
-				
-						<td v-if="isCohortNameChanged ==='' && edge_operation === ('Add Edge')" >						
-							<treeselect :value-consists-of="'LEAF_PRIORITY'" :multiple="true" :options="allNode_manualselect_options" v-model="active_edge['Manuel selected cohorts']" :searchable="true"/>
-						</td>
-						<td v-if="isCohortNameChanged ==='' && edge_operation === ('Edit Edge')" >						
-							<treeselect :value-consists-of="'LEAF_PRIORITY'" :multiple="true" :options="node_manualselect_options" v-model="active_edge['Manuel selected cohorts']" :searchable="true"/>
-						</td>
-						<td v-if="isCohortNameChanged ==='Yes'" >	
-							<treeselect :value-consists-of="'LEAF_PRIORITY'" :multiple="true" :options="updated_manualselect_options" v-model="active_edge['Manuel selected cohorts']" :searchable="true"/>
-						</td>
-
-					</tr> -->
 				</table>
 				<br>
 				<input class='button_type' type="button" value="Save" id="edge-saveButton" />
