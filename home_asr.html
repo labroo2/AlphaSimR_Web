@@ -100,9 +100,9 @@
 							<span class="tooltip">&#9432 <span class="tooltiptext">Number of locations</span></span>
 						</td>
 						<td><input type="text" placeholder="Type integer" id="locations" list="locVar" v-model="active_node.locationsVar" onchange="updateLocations(value)">
-							<datalist id="locVar">
+<!-- 							<datalist id="locVar">
 								<option v-for="lvar in locationsVar_options" v-bind:value="lvar.name">
-							</datalist>
+							</datalist> -->
 						</td>	
 					</tr>
 					<tr v-show="active_node.Type == 'Yield trial'">
@@ -110,9 +110,9 @@
 							<span class="tooltip">&#9432 <span class="tooltiptext">Number of replications</span></span>
 						</td>
 						<td><input type="text" placeholder="Type integer" id="replications" list="repVar" v-model="active_node.replicationsVar" onchange="updateReplications(value)">
-							<datalist id="repVar">
+<!-- 							<datalist id="repVar">
 								<option v-for="rvar in replicationsVar_options" v-bind:value="rvar.name">
-							</datalist>
+							</datalist> -->
 						</td>	
 					</tr>
 					<tr>
@@ -120,9 +120,9 @@
 							<span class="tooltip">&#9432 <span class="tooltiptext">Seasons</span></span>
 						</td>
 						<td><input type="text" placeholder="Type integer" id="seasons" list="seaVar" v-model="active_node.seasonsVar" onchange="updateSeasons(value)">
-							<datalist id="seaVar">
+<!-- 							<datalist id="seaVar">
 								<option v-for="svar in seasonsVar_options" v-bind:value="svar.name">
-							</datalist>
+							</datalist> -->
 						</td>	
 					</tr>
 				</table>
@@ -160,20 +160,20 @@
 						<td>Number of crosses
 							<span class="tooltip">&#9432 <span class="tooltiptext">Provide an integer for the number of crosses.</span></span>
 						</td>
-						<td><input type="text" placeholder="Type integer" id="crosses" list="croVar" v-model="active_node.crossesVar" onchange="updateCrosses(value)">
-							<datalist id="croVar">
+						<td><input type="text" placeholder="Type integer" id="crosses" list="croVar" v-model="active_edge.crossesVar" onchange="updateCrosses(value)">
+<!-- 							<datalist id="croVar">
 								<option v-for="cvar in crossesVar_options" v-bind:value="cvar.name">
-							</datalist>
+							</datalist> -->
 						</td>	
 					</tr>	
 					<tr v-if="active_edge['Breeding Type'] == 'Crossing'">
 						<td>Number of progeny per cross
 							<span class="tooltip">&#9432 <span class="tooltiptext">Provide an integer of the number of progeny per cross.</span></span>
 						</td>
-						<td><input type="text" placeholder="Type integer" id="progeny" list="proVar" v-model="active_node.progenyVar" onchange="updateProgeny(value)">
-							<datalist id="proVar">
+						<td><input type="text" placeholder="Type integer" id="progeny" list="proVar" v-model="active_edge.progenyVar" onchange="updateProgeny(value)">
+<!-- 							<datalist id="proVar">
 								<option v-for="pvar in progenyVar_options" v-bind:value="pvar.name">
-							</datalist>
+							</datalist> -->
 						</td>	
 					</tr>	
 					<tr v-if="active_edge['Breeding Type'] == 'Selection'">
@@ -217,9 +217,9 @@
 							<span class="tooltip">&#9432 <span class="tooltiptext">Provide integer for the number of families or individuals for between family selection.</span></span>
 						</td>
 						<td><input type="text" placeholder="Type integer" id="between" list="betVar" v-model="active_edge.betweenVar" onchange="updateBetween(value)">
-							<datalist id="betVar">
+<!-- 							<datalist id="betVar">
 								<option v-for="bvar in betweenVar_options" v-bind:value="bvar.name">
-							</datalist>
+							</datalist> -->
 						</td>	
 					</tr>
 				</table>
