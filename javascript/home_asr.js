@@ -1113,7 +1113,7 @@ function exportNetwork() {
 	var data_to_export = {
 		'Nodes': data_Vue.nodes.get(),
 		'Edges': data_Vue.edges.get(),
-/* TV		'Genomic Info': data_Vue.geninfo,
+		'Genomic Info': data_Vue.geninfo,
 		'Trait Info': data_Vue.traitsinfo,
 		'Selection Index': data_Vue.selection_index,
 		'Selection Index Scaling': data_Vue.selection_index_scaling,
@@ -1125,7 +1125,7 @@ function exportNetwork() {
 		'PhenotypicResidual': data_Vue.use_phenotypic_cor,
 		'Genetic Correlation': mat2,
 		'Intern': Intern,
-		'Class' : data_Vue.curUserGroup */
+		'Class' : data_Vue.curUserGroup
 	};
 	var exportValue = JSON.stringify(data_to_export, undefined, 2);
 
