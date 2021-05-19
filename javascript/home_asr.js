@@ -227,6 +227,12 @@ var data_Vue = new Vue({
 		matrix: [],
 		matrix2: [],
 		rlog: true,
+
+		//TV
+		traitsList: [
+			{"Trait Number":1, "QTL":1, "Mean":1, "Genetic Variance":1, "GxE Variance":1, "Error Variance":1, "Plot":1,
+			 "Dominance":false, "Mean Degree":1, "Variance Degree":1, "Epistasis":false, "Relative Value":1}
+		],
 		
 		show_geninfo: false,
 		show_menu: false,

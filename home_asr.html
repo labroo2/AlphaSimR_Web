@@ -40,6 +40,70 @@
 		<h2> Simulation Network Designer </h2> 
 		
 		<div id="main">
+
+			<div id="General_Info" v-on:click="show_info ='general'" onchange="checkEverything(this.id)">
+					<h3> Genome</h3> 
+					<table id="geninfo_table">
+						<colgroup><col width="40%">	<col width="60%"></colgroup>
+						<tr>
+							<td>Project Name
+								<span class="tooltip">&#9432 <span class="tooltiptext">Enter the name of your project.</span></span>
+							</td>
+							<td>
+								<input placeholder="Type a name" type="text" v-model="geninfo['Project Name']">
+							</td>
+						</tr>
+						<tr>
+							<td>Chromosomes
+								<span class="tooltip">&#9432 <span class="tooltiptext">Enter the number of chromosomes.</span></span>
+							</td>
+							<td>
+								<input placeholder="Type an integer" type="text" v-model="geninfo['Chromosomes']">
+							</td>
+						</tr>
+						<tr>
+							<td>Genetic Length
+								<span class="tooltip">&#9432 <span class="tooltiptext">Enter the genetic length of chromosomes.</span></span>
+							</td>
+							<td>
+								<input placeholder="Type a double" type="text" v-model="geninfo['Genetic Length']">
+							</td>
+						</tr>	
+				</table>
+			</div>
+<!-- 			<div id="Traits" @click="show_info ='traits'" onchange="checkEverything(this.id)">
+				<h3> Traits </h3> 
+				<table id="traits_table">
+					<colgroup><col width="40%">	<col width="60%"></colgroup>
+					<tr>
+						<td>Trait Number
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the trait number.</span></span>
+						</td>
+						<td>
+							<input placeholder="Type an integer" type="text" v-model="geninfo['Trait Number']">
+						</td>
+					</tr>
+					<tr>
+						<td>QTL
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the number of QTL.</span></span>
+						</td>
+						<td>
+							<input placeholder="Type an integer" type="text" v-model="geninfo['Trait QTL]">
+						</td>
+					</tr>
+					<tr>
+						<td>Mean
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the mean.</span></span>
+						</td>
+						<td>
+							<input placeholder="Type an integer" type="text" v-model="geninfo['Trait Mean']">
+						</td>
+					</tr>
+				</table>
+				<button @click="createNewTrait()"> Add Trait </button>
+			</div>
+
+ -->
 			<div id="Breeding_Scheme">
 
 				<h3> {{ asr_network_title }} </h3> 
