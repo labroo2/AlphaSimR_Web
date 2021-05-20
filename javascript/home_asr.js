@@ -230,6 +230,10 @@ var data_Vue = new Vue({
 		rlog: true,
 
 		//TV
+		genome: {
+			"Chromosomes": '',
+			"Genetic Length": ''
+		},
 		traitsList: [
 /* 			{
 			"Trait Number":1, 
@@ -246,7 +250,7 @@ var data_Vue = new Vue({
 			"Relative Value":1
 			} */
 		],
-		
+		/* 
 		show_geninfo: false,
 		show_menu: false,
 		Species_options: ['Chicken', 'Cattle', 'Sheep', 'Pig', 'Horse', 'Goat', 'Human', 'Maize', 'Wheat', 'Sorghum', 'Salmon', 'Other'],
@@ -290,7 +294,7 @@ var data_Vue = new Vue({
 		isBrowserSafari:'',
 		isDraggableOption:'',
 		cohortsList :[],
-		cohortsTimeList : [],
+		cohortsTimeList : [], */
 		
 		// params for nodes and edges:
 		nodes: nodes,
@@ -1156,20 +1160,21 @@ function exportNetwork() {
 	var data_to_export = {
 		'Nodes': data_Vue.nodes.get(),
 		'Edges': data_Vue.edges.get(),
-		'Genomic Info': data_Vue.geninfo,
-		//'Trait Info': data_Vue.traitsinfo,
-		'Traits': data_Vue.traitsList,
-		'Selection Index': data_Vue.selection_index,
-		'Selection Index Scaling': data_Vue.selection_index_scaling,
-		'Phenotyping Info': data_Vue.phenotyping_class,
-		'Economy': data_Vue.economy,
-		'Culling': data_Vue.culling,
-		'Subpopulation': data_Vue.subpopulation,
-		'Phenotypic Correlation': mat1,
-		'PhenotypicResidual': data_Vue.use_phenotypic_cor,
-		'Genetic Correlation': mat2,
-		'Intern': Intern,
-		'Class' : data_Vue.curUserGroup
+		//TV 'Genomic Info': data_Vue.geninfo,
+		'Genome':data_Vue.genome,
+		//TV 'Trait Info': data_Vue.traitsinfo,
+		'Traits': data_Vue.traitsList
+		//TV 'Selection Index': data_Vue.selection_index,
+		//TV 'Selection Index Scaling': data_Vue.selection_index_scaling,
+		//TV 'Phenotyping Info': data_Vue.phenotyping_class,
+		//TV 'Economy': data_Vue.economy,
+		//TV 'Culling': data_Vue.culling,
+		//TV 'Subpopulation': data_Vue.subpopulation,
+		//TV 'Phenotypic Correlation': mat1,
+		//TV 'PhenotypicResidual': data_Vue.use_phenotypic_cor,
+		//TV 'Genetic Correlation': mat2,
+		//TV 'Intern': Intern,
+		//TV 'Class' : data_Vue.curUserGroup
 	};
 	var exportValue = JSON.stringify(data_to_export, undefined, 2);
 
