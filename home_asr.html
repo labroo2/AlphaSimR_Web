@@ -43,16 +43,16 @@
 
 			<div id="General_Info" v-on:click="show_info ='general'" onchange="checkEverything(this.id)">
 					<h3> Genome</h3> 
-					<table id="geninfo_table">
+					<table id="genomeinfo_table">
 						<colgroup><col width="40%">	<col width="60%"></colgroup>
-						<tr>
+<!-- 						<tr>
 							<td>Project Name
 								<span class="tooltip">&#9432 <span class="tooltiptext">Enter the name of your project.</span></span>
 							</td>
 							<td>
 								<input placeholder="Type a name" type="text" v-model="geninfo['Project Name']">
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td>Chromosomes
 								<span class="tooltip">&#9432 <span class="tooltiptext">Enter the number of chromosomes.</span></span>
@@ -71,39 +71,149 @@
 						</tr>	
 				</table>
 			</div>
-<!-- 			<div id="Traits" @click="show_info ='traits'" onchange="checkEverything(this.id)">
-				<h3> Traits </h3> 
-				<table id="traits_table">
+			<div id="traits_div">
+				<h3> Traits</h3>
+				<table id="newtraits_table" v-if = "traitsList.length > 0">
+					<tr>
+						<th>Trait Number
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the trait number.</span></span>
+						</th>
+						<th>QTL
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the number of QTL.</span></span>
+						</th>
+						<th>Mean
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the mean.</span></span>
+						</th>
+						<th>Genetic Variance
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the genetic variance.</span></span>
+						</th>
+						<th>GxE Variance
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the GxE variance.</span></span>
+						</th>
+						<th>Error Variance
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the error variance.</span></span>
+						</th>
+						<th>Plot
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter plot.</span></span>
+						</th>
+						<th>Dominance
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter dominance.</span></span>
+						</th>
+						<th>Mean Degree
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the mean degree.</span></span>
+						</th>
+						<th>Variance Degree
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the variance degree.</span></span>
+						</th>
+						<th>Epistasis
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter epistasis.</span></span>
+						</th>
+						<th>Relative Value
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the relative value.</span></span>
+						</th>
+					</tr>
+	
+					<tr v-for="(trait, k) in traitsList" :key="k">
+						<!-- <td scope="row" class="trashIconContainer">
+							<i class="far fa-trash-alt" @click="deleteRow(k, invoice_product)"></i>
+						</td> -->
+						<td>
+							<input placeholder="Type an integer" type="text" v-model="trait['Trait Number']">
+						</td>
+						<td>
+							<input placeholder="Type an integer" type="text" v-model="trait['QTL']">
+						</td>
+						<td>
+							<input placeholder="Type a double" type="text" v-model="trait['Mean']">
+						</td>
+						<td>
+							<input placeholder="Type a double" type="text" v-model="trait['Genetic Variance']">
+						</td>
+						<td>
+							<input placeholder="Type a double" type="text" v-model="trait['GxE Variance']">
+						</td>
+						<td>
+							<input placeholder="Type a double" type="text" v-model="trait['Error Variance']">
+						</td>
+						<td>
+							<input placeholder="Type a double" type="text" v-model="trait['Plot']">
+						</td>
+						<td>
+							<input type="checkbox" v-model="trait['Dominance']"> 
+						</td>
+						<td>
+							<input placeholder="Type a double" type="text" v-model="trait['Mean Degree']">
+						</td>
+						<td>
+							<input placeholder="Type a double" type="text" v-model="trait['Variance Degree']">
+						</td>
+						<td>
+							<input type="checkbox" v-model="trait['Epistasis']"> 
+						</td>
+						<td>
+							<input placeholder="Type a double" type="text" v-model="trait['Relative Value']">
+						</td>
+						<!-- 
+						<td>
+							<input class="form-control" type="text" v-model="invoice_product.product_no" />
+						</td>
+						<td>
+							<input class="form-control" type="text" v-model="invoice_product.product_name" />
+						</td>
+						<td>
+							<input class="form-control text-right" type="number" min="0" step=".01" v-model="invoice_product.product_price" @change="calculateLineTotal(invoice_product)"
+							/>
+						</td>
+						<td>
+							<input class="form-control text-right" type="number" min="0" step=".01" v-model="invoice_product.product_qty" @change="calculateLineTotal(invoice_product)"
+							/>
+						</td>
+						<td>
+							<input readonly class="form-control text-right" type="number" min="0" step=".01" v-model="invoice_product.line_total" />
+						</td> -->
+
+					</tr>
+
+				</table>
+				<button @click="addNewTrait"> Add Trait </button>
+			</div>
+
+			<div id="Sel_Index" @click="show_info ='index'" onchange="checkEverything(this.id)">
+				<h3> Selection Index </h3> 
+				<table id="index_table">
 					<colgroup><col width="40%">	<col width="60%"></colgroup>
 					<tr>
-						<td>Trait Number
-							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the trait number.</span></span>
+						<td>Index
+							<span class="tooltip">&#9432 <span class="tooltiptext">Select to use index.</span></span>
 						</td>
 						<td>
-							<input placeholder="Type an integer" type="text" v-model="geninfo['Trait Number']">
+							<input placeholder="Select for index" type="checkbox" v-model="geninfo['Index']">
 						</td>
-					</tr>
+					</tr> 
 					<tr>
-						<td>QTL
-							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the number of QTL.</span></span>
+						<td>Trait Weights
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the weight.</span></span>
 						</td>
 						<td>
-							<input placeholder="Type an integer" type="text" v-model="geninfo['Trait QTL]">
+							<input placeholder="Type a double" type="text" v-model="geninfo['Index Weight']">
 						</td>
-					</tr>
+					</tr> 
 					<tr>
-						<td>Mean
-							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the mean.</span></span>
+						<td>
+							<label> Seasons per year </label>
 						</td>
 						<td>
-							<input placeholder="Type an integer" type="text" v-model="geninfo['Trait Mean']">
+						<select v-model="yearSeasons">
+							<option value="2seasons">2</option>
+							<option value="3seasons">3</option>
+							<option value="4seasons">4</option>
+						</select>
 						</td>
 					</tr>
 				</table>
-				<button @click="createNewTrait()"> Add Trait </button>
+				<button @click="createNewIndex()"> Add Index </button>
 			</div>
 
- -->
 			<div id="Breeding_Scheme">
 
 				<h3> {{ asr_network_title }} </h3> 
@@ -383,8 +493,6 @@
 		        o.style.height = "1px";
 		        o.style.height = (25+o.scrollHeight)+"px";
 		    }
-			
-
 
 	</script>		
 

@@ -1,5 +1,6 @@
 docs/*.xlsx
 docs/*.json
+docs/*.html
 .vscode
 
 # These are some examples of commonly ignored file patterns.

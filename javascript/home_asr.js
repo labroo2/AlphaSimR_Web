@@ -78,6 +78,7 @@ function myGeneral () {
 	this['Excel_File'] = '';
 	this['user']=''
 	//this['listOfCohorts_withInfo'] = '';
+
 }
 
 function myTrait (ind){
@@ -230,8 +231,20 @@ var data_Vue = new Vue({
 
 		//TV
 		traitsList: [
-			{"Trait Number":1, "QTL":1, "Mean":1, "Genetic Variance":1, "GxE Variance":1, "Error Variance":1, "Plot":1,
-			 "Dominance":false, "Mean Degree":1, "Variance Degree":1, "Epistasis":false, "Relative Value":1}
+/* 			{
+			"Trait Number":1, 
+			"QTL":1, 
+			"Mean":1, 
+			"Genetic Variance":1, 
+			"GxE Variance":1, 
+			"Error Variance":1, 
+			"Plot":1,
+			"Dominance":false, 
+			"Mean Degree":1, 
+			"Variance Degree":1, 
+			"Epistasis":false, 
+			"Relative Value":1
+			} */
 		],
 		
 		show_geninfo: false,
@@ -355,6 +368,11 @@ var data_Vue = new Vue({
 			],
 			Other: [{Dataset: "", Filter:"variation_set_name", Value: ""}],
 		},
+
+		// TV data
+		yearSeasons: '2seasons'
+
+
 	},
 	watch: {
 		project_saved: function(val){
@@ -531,6 +549,25 @@ var data_Vue = new Vue({
 		},	
 	},
 	methods: {
+
+		// TV
+		addNewTrait() {
+			traitnum = this.traitsList.length + 1
+			this.traitsList.push({
+				"Trait Number": traitnum, 
+				"QTL": '', 
+				"Mean": '', 
+				"Genetic Variance": '', 
+				"GxE Variance": '', 
+				"Error Variance": '', 
+				"Plot": '',
+				"Dominance": false, 
+				"Mean Degree": '', 
+				"Variance Degree": '', 
+				"Epistasis": false, 
+				"Relative Value": ''
+			})
+		}, 
 		
 		moveMatrix: function(evt) { 
 		    if (localStorage.getItem("movetrait") === null) { 
@@ -1120,7 +1157,8 @@ function exportNetwork() {
 		'Nodes': data_Vue.nodes.get(),
 		'Edges': data_Vue.edges.get(),
 		'Genomic Info': data_Vue.geninfo,
-		'Trait Info': data_Vue.traitsinfo,
+		//'Trait Info': data_Vue.traitsinfo,
+		'Traits': data_Vue.traitsList,
 		'Selection Index': data_Vue.selection_index,
 		'Selection Index Scaling': data_Vue.selection_index_scaling,
 		'Phenotyping Info': data_Vue.phenotyping_class,
