@@ -178,7 +178,7 @@
 				<button @click="addNewTrait"> Add Trait </button>
 			</div>
 
-			<div id="Sel_Index" @click="show_info ='index'" onchange="checkEverything(this.id)">
+			<div id="index_div">
 				<h3> Selection Index </h3> 
 				<table id="index_table">
 					<colgroup><col width="40%">	<col width="60%"></colgroup>
@@ -187,23 +187,24 @@
 							<span class="tooltip">&#9432 <span class="tooltiptext">Select to use index.</span></span>
 						</td>
 						<td>
-							<input placeholder="Select for index" type="checkbox" v-model="geninfo['Index']">
+							<input placeholder="Select for index" type="checkbox" v-model="indexList['Index']">
 						</td>
 					</tr> 
-					<tr>
+					<tr v-if = "indexList['Index']">
 						<td>Trait Weights
 							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the weight.</span></span>
 						</td>
 						<td>
-							<input placeholder="Type a double" type="text" v-model="geninfo['Index Weight']">
+							<input placeholder="Type a double" type="text" v-model="indexList['Trait Weight']">
 						</td>
 					</tr> 
-					<tr>
+					<tr v-if = "indexList['Index']">
 						<td>
 							<label> Seasons per year </label>
 						</td>
 						<td>
-						<select v-model="yearSeasons">
+						<select v-model="indexList['Seasons']">
+							<option value="1seasons">1</option>
 							<option value="2seasons">2</option>
 							<option value="3seasons">3</option>
 							<option value="4seasons">4</option>

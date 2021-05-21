@@ -234,22 +234,12 @@ var data_Vue = new Vue({
 			"Chromosomes": '',
 			"Genetic Length": ''
 		},
-		traitsList: [
-/* 			{
-			"Trait Number":1, 
-			"QTL":1, 
-			"Mean":1, 
-			"Genetic Variance":1, 
-			"GxE Variance":1, 
-			"Error Variance":1, 
-			"Plot":1,
-			"Dominance":false, 
-			"Mean Degree":1, 
-			"Variance Degree":1, 
-			"Epistasis":false, 
-			"Relative Value":1
-			} */
-		],
+		traitsList: [], 
+		indexList: {
+			"Index": '',
+			"Trait Weight": '',
+			"Seasons": '2seasons'
+		},
 		/* 
 		show_geninfo: false,
 		show_menu: false,
@@ -372,9 +362,6 @@ var data_Vue = new Vue({
 			],
 			Other: [{Dataset: "", Filter:"variation_set_name", Value: ""}],
 		},
-
-		// TV data
-		yearSeasons: '2seasons'
 
 
 	},
@@ -1163,7 +1150,8 @@ function exportNetwork() {
 		//TV 'Genomic Info': data_Vue.geninfo,
 		'Genome':data_Vue.genome,
 		//TV 'Trait Info': data_Vue.traitsinfo,
-		'Traits': data_Vue.traitsList
+		'Traits': data_Vue.traitsList,
+		'Selection Indices': data_Vue.indexList
 		//TV 'Selection Index': data_Vue.selection_index,
 		//TV 'Selection Index Scaling': data_Vue.selection_index_scaling,
 		//TV 'Phenotyping Info': data_Vue.phenotyping_class,
