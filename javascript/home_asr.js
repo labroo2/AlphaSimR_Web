@@ -235,11 +235,7 @@ var data_Vue = new Vue({
 			"Genetic Length": ''
 		},
 		traitsList: [], 
-		indexList: {
-			"Index": '',
-			"Trait Weight": '',
-			"Seasons": '2seasons'
-		},
+		indexList: [],
 		/* 
 		show_geninfo: false,
 		show_menu: false,
@@ -543,9 +539,9 @@ var data_Vue = new Vue({
 
 		// TV
 		addNewTrait() {
-			traitnum = this.traitsList.length + 1
+			traitN = this.traitsList.length + 1
 			this.traitsList.push({
-				"Trait Number": traitnum, 
+				"Trait Number": traitN, 
 				"QTL": '', 
 				"Mean": '', 
 				"Genetic Variance": '', 
@@ -559,6 +555,16 @@ var data_Vue = new Vue({
 				"Relative Value": ''
 			})
 		}, 
+
+		addNewIndex() {
+			indexN = this.indexList.length + 1
+			this.indexList.push({
+				"ID": indexN,
+				"Index": '',
+				"Trait Weights": '',
+				"Seasons": ''
+			})
+		},
 		
 		moveMatrix: function(evt) { 
 		    if (localStorage.getItem("movetrait") === null) { 

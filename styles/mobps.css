@@ -588,11 +588,11 @@ button[disabled]{
 /*
 Traits table appears transposed because of css
 */
-#newtraits_table tr { display: block; float: left; }
-#newtraits_table th { 
+.transposed_table tr { display: block; float: left; }
+.transposed_table th { 
 	display: block; 
 	font-size:12pt;
-    width: 100%;
+    width: 140px;
 	height: 30px;
     padding: 0px 0px;
     margin: 0px 0px;
@@ -601,7 +601,7 @@ Traits table appears transposed because of css
 	text-align: left;  
 	font-weight: 400;
 }
-#newtraits_table td { 
+.transposed_table td { 
 	display: block; 
 	font-size:12pt;
 	width: 100%;
@@ -610,7 +610,7 @@ Traits table appears transposed because of css
 	margin: 0px 0px;
 	font-family:cambria;  
 }
-#newtraits_table input[type=text]{
+.transposed_table input[type=text]{
 	font-size:12pt;
     width: 90%;
 	height: 25px;

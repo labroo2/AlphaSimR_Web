@@ -73,10 +73,10 @@
 			</div>
 			<div id="traits_div">
 				<h3> Traits</h3>
-				<table id="newtraits_table" v-if = "traitsList.length > 0">
+				<table class="transposed_table" v-if = "traitsList.length > 0">
 					<tr>
 						<th>Trait Number
-							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the trait number.</span></span>
+							<span class="tooltip">&#9432 <span class="tooltiptext">Trait number.</span></span>
 						</th>
 						<th>QTL
 							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the number of QTL.</span></span>
@@ -118,7 +118,7 @@
 							<i class="far fa-trash-alt" @click="deleteRow(k, invoice_product)"></i>
 						</td> -->
 						<td>
-							<input placeholder="Type an integer" type="text" v-model="trait['Trait Number']">
+							<label>{{ trait['Trait Number'] }}</label>
 						</td>
 						<td>
 							<input placeholder="Type an integer" type="text" v-model="trait['QTL']">
@@ -178,41 +178,44 @@
 				<button @click="addNewTrait"> Add Trait </button>
 			</div>
 
-			<div id="index_div">
+			<div>
 				<h3> Selection Index </h3> 
-				<table id="index_table">
-					<colgroup><col width="40%">	<col width="60%"></colgroup>
+				<table class="transposed_table" v-if = "indexList.length > 0">
 					<tr>
-						<td>Index
+						<th>id
+							<span class="tooltip">&#9432 <span class="tooltiptext">Index ID.</span></span>
+						</th>
+						<th>Index
 							<span class="tooltip">&#9432 <span class="tooltiptext">Select to use index.</span></span>
-						</td>
-						<td>
-							<input placeholder="Select for index" type="checkbox" v-model="indexList['Index']">
-						</td>
-					</tr> 
-					<tr v-if = "indexList['Index']">
-						<td>Trait Weights
+						</th>
+						<th>Trait Weights
 							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the weight.</span></span>
+						</th>
+						<th>Seasons
+							<span class="tooltip">&#9432 <span class="tooltiptext">Select seasons per year.</span></span>
+						</th>
+					</tr>
+					<tr v-for="(index, k) in indexList" :key="k">
+						<td>
+							<label>{{ index['ID'] }}</label>
 						</td>
 						<td>
-							<input placeholder="Type a double" type="text" v-model="indexList['Trait Weight']">
-						</td>
-					</tr> 
-					<tr v-if = "indexList['Index']">
-						<td>
-							<label> Seasons per year </label>
+							<input placeholder="Select index" type="checkbox" v-model="index['Index']">
 						</td>
 						<td>
-						<select v-model="indexList['Seasons']">
-							<option value="1seasons">1</option>
-							<option value="2seasons">2</option>
-							<option value="3seasons">3</option>
-							<option value="4seasons">4</option>
-						</select>
+							<input placeholder="Type a double" type="text" v-model="index['Trait Weight']">
 						</td>
+						<td>
+							<select v-model="index['Seasons']">
+								<option value="1seasons">1</option>
+								<option value="2seasons" selected>2</option>
+								<option value="3seasons">3</option>
+								<option value="4seasons">4</option>
+							</select>
+							</td>
 					</tr>
 				</table>
-				<button @click="createNewIndex()"> Add Index </button>
+				<button @click="addNewIndex()"> Add Index </button>
 			</div>
 
 			<div id="Breeding_Scheme">
@@ -414,10 +417,10 @@
                 <span class="tooltip">&#9432 <span class="tooltiptext">
                     <p> The current state of the project will be displayed in the Output Area for further inspection and/or editing
                 </p> </span></span>
-                <button class="sub_button" id="import_button" onclick="importNetwork_fromBox()" >Import JSON data</button>
+<!--                 <button class="sub_button" id="import_button" onclick="importNetwork_fromBox()" >Import JSON data</button>
                 <span class="tooltip">&#9432 <span class="tooltiptext">
                     <p> Import JSON-project from the Output Area below
-                </p> </span></span>
+                </p> </span></span> -->
                 <br>
                 <br>
                 
