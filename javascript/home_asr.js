@@ -1258,7 +1258,7 @@ function importNetwork_intern(inputData1) {
 	data_Vue.nodes = new vis.DataSet(inputData['Nodes']);
 	data_Vue.edges = new vis.DataSet(inputData['Edges']);
 	
-	var prior_user = data_Vue.geninfo.user;
+/* 	var prior_user = data_Vue.geninfo.user;
 	var prior_userclass = data_Vue.geninfo.curUserGroup;
 	data_Vue.geninfo = inputData['Genomic Info'] ? inputData['Genomic Info'] : new myGeneral();
 	data_Vue.geninfo.user = prior_user;
@@ -1489,7 +1489,7 @@ function importNetwork_intern(inputData1) {
 	}else{
 		data_Vue.matrix = [];
 		data_Vue.matrix2 = [];		
-	}
+	} */
 /* 	loadCohortInfoFromServer(data_Vue.geninfo['Project Name']);
 	loadCohortTimeInfoFromServer(data_Vue.geninfo['Project Name']); */
 	
