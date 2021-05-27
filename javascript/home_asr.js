@@ -1258,6 +1258,12 @@ function importNetwork_intern(inputData1) {
 	data_Vue.nodes = new vis.DataSet(inputData['Nodes']);
 	data_Vue.edges = new vis.DataSet(inputData['Edges']);
 	
+	// TV
+	data_Vue.traitsList = new vis.DataSet(inputData['Traits']);
+	data_Vue.indexList = new vis.DataSet(inputData['Selection Indices']);
+	// TODO createInputForm();
+
+
 /* 	var prior_user = data_Vue.geninfo.user;
 	var prior_userclass = data_Vue.geninfo.curUserGroup;
 	data_Vue.geninfo = inputData['Genomic Info'] ? inputData['Genomic Info'] : new myGeneral();
@@ -1496,7 +1502,7 @@ function importNetwork_intern(inputData1) {
 	draw();
 	console.log("Loading Data successful.");
 	data_Vue.project_saved = true;
-	showCorrDiv("true");
+//TV	showCorrDiv("true");
 	
 }
 
