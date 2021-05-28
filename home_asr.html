@@ -63,12 +63,26 @@
 						</tr>
 						<tr>
 							<td>Genetic Length
-								<span class="tooltip">&#9432 <span class="tooltiptext">Enter the genetic length of chromosomes.</span></span>
+								<span class="tooltip">&#9432 <span class="tooltiptext">Enter the length of chromosomes in Morgans.</span></span>
 							</td>
 							<td>
 								<input placeholder="Type a double" type="text" v-model="genome['Genetic Length']">
+								<label>Mg</label>
 							</td>
 						</tr>	
+						<tr>
+							<td>Seasons
+								<span class="tooltip">&#9432 <span class="tooltiptext">Select seasons per year.</span></span>
+							</td>	
+							<td>
+								<select v-model="genome.Seasons">
+									<option value="S">1. S</option>
+									<option value="O-S">2. O-S</option>
+									<option value="O1-O2-S">3. O1-O2-S</option>
+									<option value="O1-O2-O3-S">4. O1-O2-O3-S</option>
+								</select>
+							</td>
+						</tr>
 				</table>
 			</div>
 			<div id="traits_div">
@@ -79,7 +93,7 @@
 							<span class="tooltip">&#9432 <span class="tooltiptext">Trait number.</span></span>
 						</th>
 						<th>QTL
-							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the number of QTL.</span></span>
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the number of QTL per chromosome.</span></span>
 						</th>
 						<th>Mean
 							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the mean.</span></span>
@@ -109,7 +123,20 @@
 							<span class="tooltip">&#9432 <span class="tooltiptext">Enter epistasis.</span></span>
 						</th>
 						<th>Relative Value
-							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the relative value.</span></span>
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the relative value which is the approximate ratio of additive-by-additive epistatic variance to additive variance.</span></span>
+						</th>
+
+<!-- 						<th>id
+							<span class="tooltip">&#9432 <span class="tooltiptext">Index ID.</span></span>
+						</th> -->
+						<th>Index
+							<span class="tooltip">&#9432 <span class="tooltiptext">Select to use index.</span></span>
+						</th>
+						<th>Trait Weights
+							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the weight.</span></span>
+						</th>
+						<th>Add Index
+							<span class="tooltip">&#9432 <span class="tooltiptext">Click button to add more indices.</span></span>
 						</th>
 					</tr>
 	
@@ -142,43 +169,33 @@
 							<input type="checkbox" v-model="trait['Dominance']"> 
 						</td>
 						<td>
-							<input placeholder="Type a double" type="text" v-model="trait['Mean Degree']">
+							<input placeholder="Type a double" type="text" v-model="trait['Mean Degree']" v-if="trait['Dominance']">
 						</td>
 						<td>
-							<input placeholder="Type a double" type="text" v-model="trait['Variance Degree']">
+							<input placeholder="Type a double" type="text" v-model="trait['Variance Degree']" v-if="trait['Dominance']">
 						</td>
 						<td>
 							<input type="checkbox" v-model="trait['Epistasis']"> 
 						</td>
 						<td>
-							<input placeholder="Type a double" type="text" v-model="trait['Relative Value']">
-						</td>
-						<!-- 
-						<td>
-							<input class="form-control" type="text" v-model="invoice_product.product_no" />
+							<input placeholder="Type a double" type="text" v-model="trait['Relative Value']" v-if="trait['Epistasis']">
 						</td>
 						<td>
-							<input class="form-control" type="text" v-model="invoice_product.product_name" />
+							<input placeholder="Select index" type="checkbox" v-model="trait['Index']">
 						</td>
 						<td>
-							<input class="form-control text-right" type="number" min="0" step=".01" v-model="invoice_product.product_price" @change="calculateLineTotal(invoice_product)"
-							/>
+							<input placeholder="Type a double" type="text" v-model="trait['Trait Weight']" v-if="trait['Index']">
 						</td>
 						<td>
-							<input class="form-control text-right" type="number" min="0" step=".01" v-model="invoice_product.product_qty" @change="calculateLineTotal(invoice_product)"
-							/>
+							<button @click="addNewIndex(trait)"> Add Index </button>
 						</td>
-						<td>
-							<input readonly class="form-control text-right" type="number" min="0" step=".01" v-model="invoice_product.line_total" />
-						</td> -->
-
 					</tr>
 
 				</table>
 				<button @click="addNewTrait"> Add Trait </button>
 			</div>
 
-			<div>
+<!-- 			<div>
 				<h3> Selection Index </h3> 
 				<table class="transposed_table" v-if = "indexList.length > 0">
 					<tr>
@@ -191,9 +208,6 @@
 						<th>Trait Weights
 							<span class="tooltip">&#9432 <span class="tooltiptext">Enter the weight.</span></span>
 						</th>
-						<th>Seasons
-							<span class="tooltip">&#9432 <span class="tooltiptext">Select seasons per year.</span></span>
-						</th>
 					</tr>
 					<tr v-for="(index, k) in indexList" :key="k">
 						<td>
@@ -202,21 +216,14 @@
 						<td>
 							<input placeholder="Select index" type="checkbox" v-model="index['Index']">
 						</td>
-						<td>
+						<td v-if="index['Index']">
 							<input placeholder="Type a double" type="text" v-model="index['Trait Weight']">
 						</td>
-						<td>
-							<select v-model="index['Seasons']">
-								<option value="1seasons">1</option>
-								<option value="2seasons" selected>2</option>
-								<option value="3seasons">3</option>
-								<option value="4seasons">4</option>
-							</select>
-							</td>
 					</tr>
 				</table>
 				<button @click="addNewIndex()"> Add Index </button>
-			</div>
+			</div> -->
+
 
 			<div id="Breeding_Scheme">
 
@@ -238,7 +245,7 @@
 
 			<div id="node-popUp" onclick="checkEverything(this.id)">
 				<div id="node-popUpheader"> 
-					<h3> {{node_operation}} {{ active_node.id }} </h3> 
+					<h3> {{ node_operation }} {{ active_node.id }} </h3> 
 				</div> 
 				<br>
 				<table style="margin:auto; width:100%">

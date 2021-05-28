@@ -103,32 +103,49 @@
     }
   ],
   "Genome": {
-    "Chromosomes": "10",
-    "Genetic Length": "2.5"
+    "Chromosomes": "7",
+    "Genetic Length": "8",
+    "Seasons": "O-S"
   },
   "Traits": [
     {
       "Trait Number": 1,
-      "QTL": "32",
-      "Mean": "2",
-      "Genetic Variance": "1",
-      "GxE Variance": "1",
-      "Error Variance": "1",
-      "Plot": "1",
+      "QTL": "89",
+      "Mean": "89",
+      "Genetic Variance": "8",
+      "GxE Variance": "8",
+      "Error Variance": "9",
+      "Plot": "0-",
       "Dominance": true,
-      "Mean Degree": "1",
-      "Variance Degree": "1",
+      "Mean Degree": "9",
+      "Variance Degree": "8",
       "Epistasis": true,
-      "Relative Value": "1"
+      "Relative Value": "89",
+      "Index": "",
+      "Trait Weight": ""
+    },
+    {
+      "Trait Number": 2,
+      "QTL": "8",
+      "Mean": "98",
+      "Genetic Variance": " 8",
+      "GxE Variance": "8",
+      "Error Variance": "0-9",
+      "Plot": "09",
+      "Dominance": true,
+      "Mean Degree": "909",
+      "Variance Degree": "890",
+      "Epistasis": true,
+      "Relative Value": "090",
+      "Index": true,
+      "Trait Weight": "909"
     }
   ],
   "Selection Indices": [
     {
       "ID": 1,
-      "Index": true,
-      "Trait Weights": "",
-      "Seasons": "4seasons",
-      "Trait Weight": "2.2"
+      "Index": "",
+      "Trait Weights": ""
     }
   ]
 }

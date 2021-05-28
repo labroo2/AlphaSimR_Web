@@ -232,7 +232,8 @@ var data_Vue = new Vue({
 		//TV
 		genome: {
 			"Chromosomes": '',
-			"Genetic Length": ''
+			"Genetic Length": '',
+			"Seasons": 'O-S'
 		},
 		traitsList: [], 
 		indexList: [],
@@ -552,8 +553,11 @@ var data_Vue = new Vue({
 				"Mean Degree": '', 
 				"Variance Degree": '', 
 				"Epistasis": false, 
-				"Relative Value": ''
+				"Relative Value": '',
+				"Index": '',
+				"Trait Weight": ''
 			})
+			//this.addNewIndex()
 		}, 
 
 		addNewIndex() {
@@ -561,8 +565,8 @@ var data_Vue = new Vue({
 			this.indexList.push({
 				"ID": indexN,
 				"Index": '',
-				"Trait Weights": '',
-				"Seasons": ''
+				"Trait Weights": ''
+				/* "Seasons": '' */
 			})
 		},
 		
@@ -1259,9 +1263,11 @@ function importNetwork_intern(inputData1) {
 	data_Vue.edges = new vis.DataSet(inputData['Edges']);
 	
 	// TV
-	data_Vue.traitsList = new vis.DataSet(inputData['Traits']);
-	data_Vue.indexList = new vis.DataSet(inputData['Selection Indices']);
+	// data_Vue.traitsList = new vis.DataSet(inputData['Traits']);
+	// data_Vue.indexList = new vis.DataSet(inputData['Selection Indices']);
 	// TODO createInputForm();
+	data_Vue.genome = inputData['Genome'];
+	data_Vue.traitsList = inputData['Traits'];
 
 
 /* 	var prior_user = data_Vue.geninfo.user;
