@@ -139,13 +139,23 @@
       "Relative Value": "090",
       "Index": true,
       "Trait Weight": "909"
+    },
+    {
+      "Trait Number": 3,
+      "QTL": "53",
+      "Mean": "6",
+      "Genetic Variance": "3",
+      "GxE Variance": "5",
+      "Error Variance": "6",
+      "Plot": "3",
+      "Dominance": false,
+      "Mean Degree": "",
+      "Variance Degree": "",
+      "Epistasis": true,
+      "Relative Value": "6,6",
+      "Index": "",
+      "Trait Weight": ""
     }
   ],
-  "Selection Indices": [
-    {
-      "ID": 1,
-      "Index": "",
-      "Trait Weights": ""
-    }
-  ]
+  "Selection Indices": []
 }
