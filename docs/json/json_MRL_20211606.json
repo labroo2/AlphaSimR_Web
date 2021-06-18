@@ -1,0 +1,245 @@
+{
+  "Nodes": [
+    {
+      "id": "Crossing Block",
+      "Number of Individuals": 100,
+      "x": -318,
+      "y": -295,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Crossing Block ()",
+      "color": "#9acef4",
+      "title": "Crossing Block:  Ind",
+	  "Node Type": "Crossing Block",
+	  "Number of Seasons": ""
+    },
+    {
+      "id": "Seedlings",
+      "Number of Individuals": "",
+      "x": -318,
+      "y": -204,
+      "individualsVar": "",
+      "Founder": "No",
+      "Path": "",
+      "Proportion of Male": 1,
+      "BV Plot": "Yes",
+      "Sex": "Male",
+      "Phenotyping Class": "Fully phenotyped",
+      "Housing Cost Class": "No Housing",
+      "Proportion of genotyped individuals": 1,
+      "Genotype generation": "Random-sampling",
+      "Genotype generation subpopulation": "Population 1",
+      "label": "Seedling Nursery ()",
+      "color": "#9acef4",
+      "title": "Seedling Nursery:  Ind",
+	  "Number Of Seasons": "",
+	  "Evaluation": "TRUE",
+	  "Narrow Sense Heritability": "",
+	  "Broad Sense Heritability": "",
+	  "Error Variance": "",
+	  "Plot Size": "",
+	  "Number of Locations": "",
+	  "Number of Replicates per Location": "",
+	  "Track Response": "TRUE",
+	  "Mean Genetic Value": "",
+	  "Mean Phenotypic Value": "",
+	  "Genetic Variance": "",
+	  "Additive Genetic Variance": "",
+	  "Additive x Additive Epistatic Variance": "",
+	  "Dominance Variance": "",
+	  "Phenotypic Variance": "",
+	  "Genic Additive Variance": "",
+	  "Genic Additive x Additive Variance": "",
+	  "Genic Dominance Variance": "",
+	  "Genic Genetic Variance": "",
+	  "Mean Additive Value": "",
+	  "Mean Dominance Value": "",
+	  "Mean Additive x Additive Value": ""
+    }
+	],
+	  "Edges": [
+    {
+      "from": "Crossing Block",
+      "to": "Seedling Nursery",
+      "Number of Repeat": "",
+      "Relationship Matrix": "",
+      "BVE Method": "",
+      "Use Offspring for BVE": "",
+      "Time Needed": "10",
+      "id": "a_f",
+      "useVar": [],
+      "Selection Index": "Default Index",
+      "Cohorts used in BVE": "",
+      "Manuel selected cohorts": [],
+      "OGC": "No",
+      "Depth of Pedigree": "",
+      "Max Offspring": "Inf",
+      "color": {
+        "color": "#A6CEE3",
+        "highlight": "#A6CEE3",
+        "hover": "#A6CEE3"
+      },
+      "title": "Crossing",
+	  "Edge Type": "Cross",
+	  "nCrosses": "",
+	  "nProgenyPerCross": "",
+	  "Unit": "",
+	  "Number of Individuals": "",
+	  "Number of Families": "",
+	  "Number of Individuals Within Families": "",
+	  "Criteria": "",
+	  "Trait": ""
+    }
+	 ],
+  "Genome": {
+    "Project Name": "",
+    "Species": "",
+	"Inbred": "FALSE",
+	"Ne": 40,
+	"Ploidy": 2,
+	"quadProb": "",
+	"nSnp" : "",
+    "Use Ensembl Map": "Yes",
+    "Ensembl Dataset": "",
+    "Max Number of SNPs": 5000,
+    "number-simulations": 1,
+    "number-simulations-parallel": 1,
+    "number-simulations-core": 1,
+    "Number of Chromosomes": 10,
+    "Chromosomes of Equal Length": "Yes",
+    "Time Unit": "Weeks",
+    "Use Own Map": "Yes",
+    "Own Map Path": "",
+    "Chromosomes Info": [],
+    "Upload_CorrFile": "No",
+    "curUserGroup": "",
+    "Excel_File": "",
+    "user": "",
+	"Genetic Length": ""
+  },
+  "Trait Info": [
+  {
+	  "Trait Number": "1",
+	  "Trait Type": "ADEG",
+	  "QTL": 100,
+	  "Mean": 1,
+	  "Genetic Variance": 1,
+	  "GxE Variance": 1,
+	  "Error Variance": 1,
+	  "Plot Variance": 1,
+	  "Dominance": "TRUE",
+	  "Mean Dominance Degree": 1,
+	  "Variance of Dominance Degrees": 0.2,
+	  "Additive x Additive Epistasis": "TRUE",
+	  "Relative Epistasis Variance": 0.5,
+	  "Index": "TRUE",
+	  "Trait Weight": 1
+  },
+  {
+	  "Trait Number": "2",
+	  "Trait Type": "AEG",
+	  "QTL": 200,
+	  "Mean": 2,
+	  "Genetic Variance": 2,
+	  "GxE Variance": 2,
+	  "Error Variance": 2,
+	  "Plot Variance": 2,
+	  "Dominance": "FALSE",
+	  "Mean Dominance Degree": "",
+	  "Variance of Dominance Degrees": "",
+	  "Additive x Additive Epistasis": "TRUE",
+	  "Relative Epistasis Variance": 2,
+	  "Index": "TRUE",
+	  "Trait Weight": -1
+  }
+  ],
+  "Selection Index": [
+    {
+      "Name": "Default Index"
+    },
+    {
+      "Name": "Non"
+    }
+  ],
+  "Selection Index Scaling": [
+    {
+      "Name": "Default Index",
+      "active_scaling": false,
+      "miesenberger": false,
+      "w_scaling": "Per Unit"
+    },
+    {
+      "Name": "Non",
+      "active_scaling": false,
+      "miesenberger": false,
+      "w_scaling": "Per Unit"
+    }
+  ],
+  "Phenotyping Info": [
+    {
+      "Name": "Fully phenotyped",
+      "Cost of phenotyping": 0
+    },
+    {
+      "Name": "Not phenotyped",
+      "Cost of phenotyping": 0
+    }
+  ],
+  "Economy": {
+    "Fixed Cost": 0,
+    "Interest Rate": 0,
+    "Genotyping Cost": 50,
+    "Animal Housing Costs": [
+      {
+        "Name": "No Housing",
+        "Cost": 0
+      },
+      {
+        "Name": "Male individuals",
+        "Cost": 2000
+      },
+      {
+        "Name": "Female individuals",
+        "Cost": 3000
+      }
+    ]
+  },
+  "Culling": {
+    "culling_reasons": []
+  },
+  "Subpopulation": {
+    "subpopulation_list": [
+      {
+        "Name": "Population 1",
+        "beta1": 1,
+        "beta2": 1,
+        "share0": 0,
+        "share1": 0,
+        "fixed_freq": 0,
+        "QTL Info": []
+      }
+    ]
+  },
+  "Phenotypic Correlation": [],
+  "PhenotypicResidual": false,
+  "Genetic Correlation": [],
+  "Intern": {
+    "show_matrix_element": [],
+    "counter_pheno": 0,
+    "counter_qtl": 0,
+    "counter_qtl_sub": 0,
+    "individualsVar_options": [],
+    "genetic_data": "Ens",
+    "runned": false
+  },
+  "Class": ""
+}
