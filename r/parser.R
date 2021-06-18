@@ -4,7 +4,7 @@ library(AlphaSimR)
 
 
 # import the breeding scheme
-scheme <- fromJSON(file = "json_MRL_20211606.json")
+scheme <- fromJSON(file = "docs/json/json_MRL_20211606.json")
 
 
 
