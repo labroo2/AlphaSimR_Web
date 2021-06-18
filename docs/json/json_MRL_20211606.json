@@ -107,7 +107,7 @@
 	"Ne": 40,
 	"Ploidy": 2,
 	"quadProb": "",
-	"nSnp" : "",
+	"nSnp" : 400,
     "Use Ensembl Map": "Yes",
     "Ensembl Dataset": "",
     "Max Number of SNPs": 5000,
@@ -129,7 +129,6 @@
   "Trait Info": [
   {
 	  "Trait Number": "1",
-	  "Trait Type": "ADEG",
 	  "QTL": 100,
 	  "Mean": 1,
 	  "Genetic Variance": 1,
@@ -147,7 +146,6 @@
   },
   {
 	  "Trait Number": "2",
-	  "Trait Type": "AEG",
 	  "QTL": 200,
 	  "Mean": 2,
 	  "Genetic Variance": 2,
