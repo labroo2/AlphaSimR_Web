@@ -28,95 +28,125 @@ founderPop <- runMacs2(nInd = nInd,
 # make the simulation parameters
 SP <- SimParam$new(founderPop)
 
+# add the traits
 nTraits <- length(scheme$`Trait Info`)
+traitTypes <- c()
+
+# define the trait types
+for(i in 1:nTraits){
+  
+  type <- "A"
+ 
+  # check for D
+  if(as.logical(scheme$`Trait Info`[[i]]$Dominance) == TRUE){
+    type <- paste(type, "D", sep = "")
+  }
+  
+  # check for E
+  if(as.logical(scheme$`Trait Info`[[i]]$`Additive x Additive Epistasis`) == TRUE){
+    type <- paste(type, "E", sep = "")
+  }
+  
+  # check for G
+  if(as.logical(scheme$`Trait Info`[[i]]$GxE) == TRUE){
+    type <- paste(type, "G", sep = "")
+  }
+
+  # paste to make the traitTypes
+  traitTypes[i] <- type
+    
+} # end trait definition
+
+
 
 # add the traits
 for(i in nTraits){
   
   # addTraitA
-  if(scheme$`Trait Info`[[i]]$`Trait Type` == "A"){
+  if(traitTypes[i] == "A"){
     SP$addTraitA(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL, 
                  mean = scheme$`Trait Info`[[i]]$Mean,
                  var = scheme$`Trait Info`[[i]]$`Genetic Variance`
-                 )
+    )
   }
   
   # addTraitAD
-  if(scheme$`Trait Info`[[i]]$`Trait Type` == "AD"){
+  if(traitTypes[i] == "AD"){
     SP$addTraitAD(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
                   mean = scheme$`Trait Info`[[i]]$Mean,
                   var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
                   meanDD = scheme$`Trait Info`[[i]]$`Mean Dominance Degree`,
                   varDD = scheme$`Trait Info`[[i]]$`Variance of Dominance Degrees`
-                  )
+    )
   }
-    
-    # addTraitAG
-    if(scheme$`Trait Info`[[i]]$`Trait Type` == "AG"){
-      SP$addTraitAG(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
+  
+  # addTraitAG
+  if(traitTypes[i] == "AG"){
+    SP$addTraitAG(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
+                  mean = scheme$`Trait Info`[[i]]$Mean,
+                  var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
+                  varGxE = scheme$`Trait Info`[[i]]$`GxE Variance`
+                  # any need for the varEnv argument?
+    )
+  }
+  
+  # addTraitADG
+  if(traitTypes[i] == "ADG"){
+    SP$addTraitADG(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
+                   mean = scheme$`Trait Info`[[i]]$Mean,
+                   var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
+                   # any need for the varEnv argument?
+                   varGxE = scheme$`Trait Info`[[i]]$`GxE Variance`,
+                   meanDD = scheme$`Trait Info`[[i]]$`Mean Dominance Degree`,
+                   varDD = scheme$`Trait Info`[[i]]$`Variance of Dominance Degrees`
+    )
+  }
+  
+  # addTraitAE
+  if(traitTypes[i] == "AE"){
+    SP$addTraitAE(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
+                  mean = scheme$`Trait Info`[[i]]$Mean,
+                  var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
+                  relAA = scheme$`Trait Info`[[i]]$`Relative Epistasis Variance`
+    )
+  }
+  
+  # addTraitADE
+  if(traitTypes[i] == "ADE"){
+    SP$addTraitADE(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
+                   mean = scheme$`Trait Info`[[i]]$Mean,
+                   var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
+                   meanDD = scheme$`Trait Info`[[i]]$`Mean Dominance Degree`,
+                   varDD = scheme$`Trait Info`[[i]]$`Variance of Dominance Degrees`,
+                   relAA= scheme$`Trait Info`[[i]]$`Relative Epistasis Variance`
+    )
+  }
+  
+  # addTraitAEG
+  if(traitTypes[i] == "AEG"){
+    SP$addTraitAEG(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
+                   mean = scheme$`Trait Info`[[i]]$Mean,
+                   var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
+                   relAA= scheme$`Trait Info`[[i]]$`Relative Epistasis Variance`,
+                   varGxE = scheme$`Trait Info`[[i]]$`GxE Variance`
+                   # is varEnv option needed?
+    )
+  }
+  
+  # addTraitADEG
+  if(traitTypes[i] == "ADEG"){
+    SP$addTraitADEG(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
                     mean = scheme$`Trait Info`[[i]]$Mean,
                     var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
-                    varGxE = scheme$`Trait Info`[[i]]$`GxE Variance`
-                    # any need for the varEnv argument?
-                    )
-    }
-    
-    # addTraitADG
-    if(scheme$`Trait Info`[[i]]$`Trait Type` == "ADG"){
-      SP$addTraitADG(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
-                     mean = scheme$`Trait Info`[[i]]$Mean,
-                     var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
-                     # any need for the varEnv argument?
-                     varGxE = scheme$`Trait Info`[[i]]$`GxE Variance`,
-                     meanDD = scheme$`Trait Info`[[i]]$`Mean Dominance Degree`,
-                     varDD = scheme$`Trait Info`[[i]]$`Variance of Dominance Degrees`
-                     )
-    }
-    
-    # addTraitAE
-    if(scheme$`Trait Info`[[i]]$`Trait Type` == "AE"){
-      SP$addTraitAE(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
-                    mean = scheme$`Trait Info`[[i]]$Mean,
-                    var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
-                    relAA = scheme$`Trait Info`[[i]]$`Relative Epistasis Variance`
-                    )
-    }
-    
-    # addTraitADE
-      if(scheme$`Trait Info`[[i]]$`Trait Type` == "ADE"){
-        SP$addTraitADE(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
-                       mean = scheme$`Trait Info`[[i]]$Mean,
-                       var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
-                       meanDD = scheme$`Trait Info`[[i]]$`Mean Dominance Degree`,
-                       varDD = scheme$`Trait Info`[[i]]$`Variance of Dominance Degrees`,
-                       relAA= scheme$`Trait Info`[[i]]$`Relative Epistasis Variance`
-                       )
-      }
-    
-    # addTraitAEG
-    if(scheme$`Trait Info`[[i]]$`Trait Type` == "AEG"){
-      SP$addTraitAEG(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
-                     mean = scheme$`Trait Info`[[i]]$Mean,
-                     var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
-                     relAA= scheme$`Trait Info`[[i]]$`Relative Epistasis Variance`,
-                     varGxE = scheme$`Trait Info`[[i]]$`GxE Variance`
-                     # is varEnv option needed?
-                     )
-    }
-    
-    # addTraitADEG
-    if(scheme$`Trait Info`[[i]]$`Trait Type` == "ADEG"){
-      SP$addTraitADEG(nQtlPerChr = scheme$`Trait Info`[[i]]$QTL,
-                      mean = scheme$`Trait Info`[[i]]$Mean,
-                      var = scheme$`Trait Info`[[i]]$`Genetic Variance`,
-                      # is varEnv option needed?
-                      varGxE = scheme$`Trait Info`[[i]]$`GxE Variance`,
-                      meanDD = scheme$`Trait Info`[[i]]$`Mean Dominance Degree`,
-                      varDD = scheme$`Trait Info`[[i]]$`Variance of Dominance Degrees`,
-                      relAA= scheme$`Trait Info`[[i]]$`Relative Epistasis Variance`
-                      )
-    }
+                    # is varEnv option needed?
+                    varGxE = scheme$`Trait Info`[[i]]$`GxE Variance`,
+                    meanDD = scheme$`Trait Info`[[i]]$`Mean Dominance Degree`,
+                    varDD = scheme$`Trait Info`[[i]]$`Variance of Dominance Degrees`,
+                    relAA= scheme$`Trait Info`[[i]]$`Relative Epistasis Variance`
+    )
+  }
 } # end trait addition loop
+
 
 SP$addSnpChip(nSnpPerChr = scheme$Genome$nSnp) # add this to the JSON file if 
 
@@ -144,31 +174,6 @@ crossingBlock <- randCross(startPop,
 
 
 
-#traitMaker <- matrix(nrow = nTraits, ncol = 4); colnames(traitMaker) <- c("A", "D", "E", "G")
-
-#for(i in nTraits){
-  
-#  # if GxE is not zero, add a G
-#  if(scheme$`Trait Info`[[i]]$`GxE Variance` != 0){
-#    traitMaker[i, "G"] <- "G"
-#  }
-  
-#  # if there is dominance, add a D
-#  if(scheme$`Trait Info`[[i]]$Dominance == "TRUE"){
-#    traitMaker[i, "D"] <- "D"
-#  }
-#  
-#}
 
 
 
-
-
-
-
-
-
-lapply(scheme$Nodes,
-       function(x) grep("Crossing Block", x))
-mapply(scheme$Nodes,
-       function(x) grep("Crossing Block", x))
